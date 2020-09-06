@@ -1,12 +1,11 @@
 package com.vtb.java.spring.task.manager.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
-import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -14,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+
 @Entity
 @Data
 @Table(name = "tasks")
@@ -73,6 +73,7 @@ public class Task {
 
     @OneToMany(mappedBy = "task")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @JsonIgnore
     private List<Commentary> commentaries;
 
     @CreationTimestamp
@@ -82,6 +83,5 @@ public class Task {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
 
 }
