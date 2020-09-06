@@ -42,4 +42,7 @@ public class User {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+//    @OneToMany(mappedBy = "user")
+//    List<Project> project;
 }

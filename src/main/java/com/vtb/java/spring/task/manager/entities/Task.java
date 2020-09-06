@@ -26,8 +26,10 @@ public class Task {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "leader_id")
-    private Long leaderId;
+    @ManyToOne
+    @JoinColumn(name = "leader_id")
+    private User user;
+//    private Long leaderId;
 
     @Column(name = "description")
     private String description;

@@ -12,10 +12,20 @@ angular.module('app').controller('createProjectController', function ($scope, $h
         $http.post(contextPath + '/api/v1/projects/create', $scope.newProject)
             .then(function (response){
             $scope.push(response.data);
-            // $scope.leaderList
-            // $window.location.href = /projects;
-
             });
+    }
+
+    var expanded = false;
+
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
     }
 
     fillTable();

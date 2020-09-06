@@ -28,16 +28,25 @@
             </div>
             <div class="form-group">
                 <label for="inputDate">Введите дату:</label>
-                <input type="date" ng-model="newProject.deadline" class="form-control" id="inputDate">
+                <input type="datetime-local" ng-model="newProject.deadline" class="form-control" id="inputDate">
             </div>
-<!--            <div class="form-group">-->
-<!--                <label for="ProjectDeadline">Дата сдачи проекта</label>-->
-<!--                <input type="project.deadline" ng-model="newProject.deadline" class="form-control" id="ProjectDeadline" placeholder="deadline">-->
-<!--            </div>-->
-    <!--        <div class="form-check">-->
-    <!--            <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-    <!--            <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-    <!--        </div>-->
+
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxes()">
+                    <select>
+                        <option>Select an option</option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes">
+                    <label for="one">
+                        <input type="checkbox" id="one" />First checkbox</label>
+                    <label for="two">
+                        <input type="checkbox" id="two" />Second checkbox</label>
+                    <label for="three">
+                        <input type="checkbox" id="three" />Third checkbox</label>
+                </div>
+            </div>
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
 </div>
