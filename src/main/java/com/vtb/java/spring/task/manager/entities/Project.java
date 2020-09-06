@@ -1,9 +1,9 @@
 package com.vtb.java.spring.task.manager.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -33,6 +33,7 @@ public class Project {
     private Collection<User> users;
 
     @OneToMany(mappedBy = "project")
+    @JsonIgnore
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Task> tasks;
 

@@ -1,0 +1,40 @@
+<div>
+    <h1>Задача № {{task.id}}:</h1>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Id задачи</td>
+            <td>{{task.id}}</td>
+        </tr>
+        <tr>
+            <td>Название</td>
+            <td>{{task.title}}</td>
+        </tr>
+        <tr>
+            <td>Id владельца</td>
+            <td>{{task.leaderId}}</td>
+        </tr>
+        <tr>
+            <td>Описание</td>
+            <td>{{task.description}}</td>
+        </tr>
+        <tr>
+            <td>Название проекта</td>
+            <td>{{task.project.title}}</td>
+        </tr>
+        <tr>
+            <td>Приоритет</td>
+            <td>{{task.priority}}</td>
+        </tr>
+        <tr>
+            <td>Статус</td>
+            <td>{{task.status}}</td>
+        </tr>
+        <tr>
+            <td>Срок исполнения</td>
+            <td>{{task.deadLine}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <h1>Комментарии</h1>
+
+</div>
