@@ -31,7 +31,10 @@ public class ProjectsRestController {
     @PostMapping(path = "/create",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Project createNewProject(@RequestBody Project project){
-        project.setDeadline(project.getDeadline().plusHours(3L));
+        System.out.println("project = " + project);
+        if (project.getDeadline() != null){
+            project.setDeadline(project.getDeadline().plusHours(3L));
+        }
         return projectService.saveOrUpdate(project);
     }
 

@@ -28,19 +28,15 @@ public class Project {
     @Column(name = "title")
     private String title;
 
-//    @ManyToOne
-//    @JoinColumn(name = "leader_id")
-//    private User user;
-
     @ManyToOne
     @JoinColumn(name = "leader_id")
     private User user;
 
-//    @ManyToMany
-//    @JoinTable(name = "users_projects",
-//            joinColumns = @JoinColumn(name = "project_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id"))
-//    private Collection<User> users;
+    @ManyToMany
+    @JoinTable(name = "projects_users",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users;
 
 //    @OneToMany(mappedBy = "project")
 //    @Cascade(org.hibernate.annotations.CascadeType.ALL)

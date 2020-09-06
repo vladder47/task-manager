@@ -13,30 +13,36 @@ values
 ('John Johnson', '321', 'john_johnson@gmail.com');
 
 create table projects (
-  id                    bigserial primary key,
-  title                 varchar(30) not null,
-  leader_id             bigserial not null references users(id),
---   users                 bigint,
---   tasks                 bigint,
-  deadline              timestamp without time zone,
-  created_at          timestamp default current_timestamp,
-  updated_at          timestamp default current_timestamp
+    id                    bigserial primary key,
+    title                 varchar(30) not null,
+    leader_id             bigserial not null references users(id),
+--     users                 bigserial,
+--     tasks                 bigint,
+    deadline              timestamp without time zone,
+    created_at          timestamp default current_timestamp,
+    updated_at          timestamp default current_timestamp
 );
 INSERT INTO projects (title, leader_id, deadline)
 VALUES
-('Project 1', 2, '2020-09-30');
+('Project 1', 1, '2020-09-30'),
+('Project 2', 3, '2010-08-22');
 
-INSERT INTO projects (title, leader_id, deadline, created_at, updated_at)
-VALUES
-('Project 2', 1, '2020-09-30', '2020-09-05', '2020-09-05');
-
-CREATE TABLE users_projects (
-  user_id               bigserial not null,
-  project_id            bigserial not null,
-  primary key (user_id, project_id),
-  foreign key (user_id) references users (id),
-  foreign key (project_id) references projects (id)
+CREATE TABLE projects_users (
+    id                  bigserial,
+    project_id            bigserial not null references projects(id),
+    user_id               bigserial not null references users(id),
+  primary key (user_id, project_id)
+--   foreign key (user_id) references users (id),
+--   foreign key (project_id) references projects (id)
 );
+
+INSERT INTO projects_users (project_id, user_id)
+VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
+(2, 2);
 
 create table tasks (
   id                    bigserial primary key,
