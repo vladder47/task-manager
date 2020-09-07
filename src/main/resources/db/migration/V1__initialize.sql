@@ -34,13 +34,13 @@ CREATE TABLE users_projects
     foreign key (project_id) references projects (id)
 );
 
-INSERT INTO projects_users (project_id, user_id)
+INSERT INTO users_projects (project_id, user_id)
 VALUES
 (1, 1),
 (1, 2),
 (1, 3),
 (2, 1),
-(2, 2)
+(2, 2);
 
 create table tasks (
   id                    bigserial primary key,

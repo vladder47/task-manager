@@ -34,12 +34,6 @@ public class TaskController {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Задачи с id = %d не найдена", id)));
     }
 
-    @GetMapping("/create/{id}")
-    public Project getProject(@PathVariable Long id) {
-        return projectService.findProjectById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Проект с id = %d не найден", id)));
-    }
-
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Task createNewTask(@RequestBody Task task) {

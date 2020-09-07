@@ -1,7 +1,8 @@
-package com.vtb.java.spring.task.manager.project;
+package com.vtb.java.spring.task.manager.controllers;
 
 import com.vtb.java.spring.task.manager.entities.Project;
 import com.vtb.java.spring.task.manager.entities.User;
+import com.vtb.java.spring.task.manager.exceptions.ResourceNotFoundException;
 import com.vtb.java.spring.task.manager.services.ProjectService;
 import com.vtb.java.spring.task.manager.services.UserService;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/projects")
-public class ProjectsRestController {
+public class ProjectController {
     private ProjectService projectService;
     private UserService userService;
 
@@ -25,7 +26,8 @@ public class ProjectsRestController {
     @GetMapping("/{id}")
     public Project getProjectById(@PathVariable Long id){
         System.out.println(projectService.findById(id));
-        return projectService.findById(id);
+        return projectService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Проект с id = %d не найден", id)));
     }
 
     @PostMapping(path = "/create",consumes = "application/json", produces = "application/json")
