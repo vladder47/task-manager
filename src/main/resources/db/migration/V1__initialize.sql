@@ -16,8 +16,6 @@ create table projects (
     id                    bigserial primary key,
     title                 varchar(30) not null,
     leader_id             bigserial not null references users(id),
---     users                 bigserial,
---     tasks                 bigint,
     deadline              timestamp without time zone,
     created_at          timestamp default current_timestamp,
     updated_at          timestamp default current_timestamp
@@ -27,13 +25,13 @@ VALUES
 ('Project 1', 1, '2020-09-30'),
 ('Project 2', 3, '2010-08-22');
 
-CREATE TABLE projects_users (
-    id                  bigserial,
-    project_id            bigserial not null references projects(id),
-    user_id               bigserial not null references users(id),
-  primary key (user_id, project_id)
---   foreign key (user_id) references users (id),
---   foreign key (project_id) references projects (id)
+CREATE TABLE users_projects
+(
+    user_id    bigint not null,
+    project_id bigint not null,
+    primary key (user_id, project_id),
+    foreign key (user_id) references users (id),
+    foreign key (project_id) references projects (id)
 );
 
 INSERT INTO projects_users (project_id, user_id)
@@ -42,7 +40,7 @@ VALUES
 (1, 2),
 (1, 3),
 (2, 1),
-(2, 2);
+(2, 2)
 
 create table tasks (
   id                    bigserial primary key,
@@ -57,23 +55,43 @@ create table tasks (
   updated_at          timestamp default current_timestamp
 );
 
-CREATE TABLE users_tasks (
-  user_id               bigserial not null,
-  task_id               bigserial not null,
-  primary key (user_id, task_id),
-  foreign key (user_id) references users (id),
-  foreign key (task_id) references tasks (id)
+CREATE TABLE users_tasks
+(
+    user_id bigint not null,
+    task_id bigint not null,
+    primary key (user_id, task_id),
+    foreign key (user_id) references users (id),
+    foreign key (task_id) references tasks (id)
 );
 
-create table commentary (
-  id                    bigserial,
-  text                  varchar(255) not null,
-  user_id               bigserial not null,
-  task_id               bigserial not null,
-  parent                bigserial not null,
-  created_at            timestamp default current_timestamp,
-  updated_at            timestamp default current_timestamp,
-  primary key (id),
-  foreign key (user_id) references users (id),
-  foreign key (task_id) references tasks (id)
+create table commentary
+(
+    id         bigserial,
+    text       varchar(255) not null,
+    user_id    bigint       not null,
+    task_id    bigint       not null,
+    parent     bigint       not null,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp,
+    primary key (id),
+    foreign key (user_id) references users (id),
+    foreign key (task_id) references tasks (id)
 );
+
+INSERT INTO users(username, password, email)
+VALUES ('Vladislav', 'qwerty', 'vladisdrozdov@gmail.com'),
+       ('Andrey', 'qwerty', 'asdfghrewq@gmail.com');
+
+INSERT INTO projects(title, leader_id)
+VALUES ('Project 1', 1),
+       ('Project 2', 2);
+
+INSERT INTO tasks (title, description, status, priority, leader_id, project_id, deadline)
+VALUES ('Task 1', 'Description 1', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
+       ('Task 2', 'Description 2', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
+       ('Task 3', 'Description 3', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
+       ('Task 4', 'Description 4', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
+       ('Task 5', 'Description 5', 'CREATED', 'PLANNING', 2, 2, '2020-09-05'),
+       ('Task 6', 'Description 6', 'CREATED', 'PLANNING', 2, 2, '2020-09-05'),
+       ('Task 7', 'Description 7', 'CREATED', 'PLANNING', 2, 2, '2020-09-05'),
+       ('Task 8', 'Description 8', 'CREATED', 'PLANNING', 2, 2, '2020-09-05');

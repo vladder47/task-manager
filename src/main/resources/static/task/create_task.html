@@ -1,0 +1,36 @@
+<h3>Добавить новую задачу</h3>
+<form novalidate ng-submit="createNewTask()">
+    <div class="form-group col-md-6">
+        <label for="newTaskTitle">Название</label>
+        <input class="form-control" type="text" ng-model="newTask.title" id="newTaskTitle">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="newTaskLeaderId">Id владельца</label>
+        <input class="form-control" type="number" ng-model="newTask.leaderId" id="newTaskLeaderId">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="newTaskDescription">Описание</label>
+        <input class="form-control" type="text" ng-model="newTask.description" id="newTaskDescription">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="newTaskProject">Id проекта</label>
+<!--        todo заставить работать с ng-value!!!-->
+<!--        <input class="form-control" ng-model="newTask.project.id" id="newTaskProject" ng-value="project.id">-->
+        <input class="form-control" ng-model="newTask.project.id" id="newTaskProject">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="newTaskPriority">Приоритет</label>
+        <input class="form-control" type="text" ng-model="newTask.priority" id="newTaskPriority">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="newTaskStatus">Статус</label>
+        <input class="form-control" type="text" ng-model="newTask.status" id="newTaskStatus">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="newTaskDeadline">Срок исполнения</label>
+        <input class="form-control" type="date" ng-model="newTask.deadLine" id="newTaskDeadline">
+    </div>
+    <div>
+        <button class="btn btn-success" type="submit">Сохранить</button>
+    </div>
+</form>

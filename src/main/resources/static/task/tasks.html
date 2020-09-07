@@ -1,0 +1,45 @@
+<div>
+    <h1>Задачи проекта:</h1>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Id задачи</td>
+            <td>Название</td>
+            <td>Id владельца</td>
+            <td>Описание</td>
+            <td>Название проекта</td>
+            <td>Приоритет</td>
+            <td>Статус</td>
+            <td>Срок исполнения</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="t in TasksList">
+            <td>{{t.id}}</td>
+            <td><a ng-href="#!/tasks/{{t.id}}">{{t.title}}</a></td>
+            <td>{{t.leaderId}}</td>
+            <td>{{t.description}}</td>
+            <td>{{t.project.title}}</td>
+            <td>{{t.priority}}</td>
+            <td>{{t.status}}</td>
+            <td>{{t.deadLine}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-info" ng-href="#!/tasks/create/{{projectId}}">Добавить задачу</a>
+
+    <nav aria-label="Task navigation">
+        <ul class="pagination" ng-if="page.totalPages > 1">
+            <li class="page-item" ng-class="{disabled:page.first}">
+                <a class="page-link" ng-click="findTasks(1)">Первая</a></li>
+            <li class="page-item" ng-class="{disabled:page.first}">
+                <a class="page-link" ng-click="findTasks(page.pageable.pageNumber)">Предыдущая</a></li>
+            <li class="page-item" ng-repeat="p in pages" ng-class="{active:page.pageable.pageNumber === p - 1}">
+                <a class="page-link" ng-click="findTasks(p)">{{p}}</a></li>
+            <li class="page-item" ng-class="{disabled:page.last}">
+                <a class="page-link" ng-click="findTasks(page.pageable.pageNumber + 2)">Следующая</a></li>
+            <li class="page-item" ng-class="{disabled:page.last}">
+                <a class="page-link" ng-click="findTasks(page.totalPages)">Последняя</a></li>
+        </ul>
+    </nav>
+
+</div>

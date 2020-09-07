@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -38,12 +37,12 @@ public class Project {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
-//    @OneToMany(mappedBy = "project")
-//    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-//    private List<Task> tasks;
-
     @Column(name = "deadline")
     private LocalDateTime deadline;
+
+    @OneToMany(mappedBy = "project")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<Task> tasks;
 
     @CreationTimestamp
     @Column(name = "created_at")
