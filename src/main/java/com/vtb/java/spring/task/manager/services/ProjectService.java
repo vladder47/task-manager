@@ -1,6 +1,7 @@
 package com.vtb.java.spring.task.manager.services;
 
 import com.vtb.java.spring.task.manager.entities.Project;
+import com.vtb.java.spring.task.manager.entities.dto.ProjectDto;
 import com.vtb.java.spring.task.manager.repositories.ProjectRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,10 @@ public class ProjectService {
 
     public List<Project> findAll(){
         return projectRepository.findAll();
+    }
+
+    public List<ProjectDto> findAllProjectDto() {
+        return projectRepository.findAllProjectsDto();
     }
 
     public Optional<Project> findById(Long id){
