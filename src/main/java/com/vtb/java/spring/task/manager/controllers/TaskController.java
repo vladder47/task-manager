@@ -31,7 +31,7 @@ public class TaskController {
 
     @GetMapping("/{id}")
     public TaskDto getTaskById(@PathVariable Long id) {
-        return taskService.findTaskPageDtoById(id)
+        return taskService.findTaskDtoById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Задачи с id = %d не найдена", id)));
     }
 

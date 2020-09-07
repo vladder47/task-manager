@@ -24,7 +24,7 @@ public class TaskService {
         return taskRepository.findAllTasksByProjectId(projectId, PageRequest.of(page, size));
     }
 
-    public Optional<TaskDto> findTaskPageDtoById(Long id) {
+    public Optional<TaskDto> findTaskDtoById(Long id) {
         return taskRepository.findTaskById(id);
     }
 
