@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html ng-app="app" ng-controller="projectsController">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+    <h1>Проекты:</h1>
+    <br>
+    <a class="btn btn-outline-warning" href="#!/projects/create">Создать проект</a>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Название</td>
+            <td>Имя руководителя</td>
+            <td>Время создание</td>
+            <td>Время сдачи</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="p in ProjectsList">
+            <td>{{p.title}}</td>
+            <td>{{p.user.username}}</td>
+            <td>{{p.createdAt}}</td>
+            <td>{{p.deadline}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
