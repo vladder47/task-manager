@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 @Getter
 public class TaskFilter {
+    // тоже не используется
     private Specification<Task> spec;
 
     public TaskFilter(Long projectId) {

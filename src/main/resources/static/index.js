@@ -13,7 +13,7 @@
                 controller: 'projectsController'
             })
             .when('/projects/create', {
-                templateUrl: 'create_project/create-project.html',
+                templateUrl: 'project/create-project.html',
                 controller: 'createProjectController'
             })
             .when('/tasks', {

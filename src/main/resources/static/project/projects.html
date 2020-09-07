@@ -25,8 +25,8 @@
         </tr>
         <tbody>
         <tr ng-repeat="p in ProjectsList">
-            <td>{{p.title}}</td>
-            <td>{{p.user.username}}</td>
+            <td><a ng-href="#!/tasks?project={{p.id}}">{{p.title}}</a></td>
+            <td>{{p.leaderUsername}}</td>
             <td>{{p.createdAt}}</td>
             <td>{{p.deadline}}</td>
         </tr>

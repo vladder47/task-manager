@@ -2,6 +2,7 @@ package com.vtb.java.spring.task.manager.controllers;
 
 import com.vtb.java.spring.task.manager.entities.Project;
 import com.vtb.java.spring.task.manager.entities.User;
+import com.vtb.java.spring.task.manager.entities.dto.ProjectDto;
 import com.vtb.java.spring.task.manager.exceptions.ResourceNotFoundException;
 import com.vtb.java.spring.task.manager.services.ProjectService;
 import com.vtb.java.spring.task.manager.services.UserService;
@@ -18,9 +19,14 @@ public class ProjectController {
     private ProjectService projectService;
     private UserService userService;
 
+//    @GetMapping
+//    public List<Project> getAllProjects(){
+//        return projectService.findAll();
+//    }
+
     @GetMapping
-    public List<Project> getAllProjects(){
-        return projectService.findAll();
+    public List<ProjectDto> getAllProjectsDto(){
+        return projectService.findAllProjectDto();
     }
 
     @GetMapping("/{id}")

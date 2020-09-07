@@ -14,13 +14,6 @@ angular.module('app').controller('tasksController', function ($scope, $http, $ro
             });
     };
 
-    getTask = function (taskId) {
-        $http.get(contextPath + '/api/v1/tasks/' + taskId)
-            .then(function (response) {
-                $scope.task = response.data.content;
-            });
-    };
-
     $scope.findTasks = function (pageNumber) {
         fillTable(pageNumber, $routeParams.project);
     };
