@@ -14,11 +14,16 @@
 <body>
 
 <div class="container">
-    <h1>Task manager</h1>
+    <h1>Менеджер задач</h1>
+    <br>
+<!--    <h2>список проектов</h2>-->
+    <a class="btn btn-outline-warning" href="#!/projects">Проекты</a>
 
     <ng-view></ng-view>
 
     <script src="index.js"></script>
+    <script src="project/projects.js"></script>
+    <script src="create_project/create-project.js"></script>
     <script src="task/tasks.js"></script>
     <script src="task/task_page.js"></script>
     <script src="task/create_task.js"></script>

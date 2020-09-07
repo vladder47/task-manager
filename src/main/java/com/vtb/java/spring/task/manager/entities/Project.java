@@ -1,19 +1,23 @@
 package com.vtb.java.spring.task.manager.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Data
 @Table(name = "projects")
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +27,20 @@ public class Project {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "leader_id")
-    private Long leaderId;
+    @ManyToOne
+    @JoinColumn(name = "leader_id")
+    private User user;
 
     @ManyToMany
-    @JoinTable(name = "users_projects",
+    @JoinTable(name = "projects_users",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Collection<User> users;
+    private List<User> users;
+
+    @Column(name = "deadline")
+    private LocalDateTime deadline;
 
     @OneToMany(mappedBy = "project")
-    @JsonIgnore
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Task> tasks;
 
