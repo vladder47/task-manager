@@ -1,6 +1,7 @@
 package com.vtb.java.spring.task.manager.controllers;
 
 import com.vtb.java.spring.task.manager.entities.User;
+import com.vtb.java.spring.task.manager.entities.dto.UserDto;
 import com.vtb.java.spring.task.manager.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,5 +19,10 @@ public class UserController {
     @GetMapping
     public List<User> getAllUsers() {
         return userService.findAllUsers();
+    }
+
+    @GetMapping("/dtos")
+    public List<UserDto> getAllUsersDto() {
+        return userService.findAllUsersDto();
     }
 }

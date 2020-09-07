@@ -2,7 +2,7 @@ angular.module('app').controller('createProjectController', function ($scope, $h
     const contextPath = 'http://localhost:8189/app';
 
     fillTable = function () {
-        $http.get(contextPath + '/api/v1/users')
+        $http.get(contextPath + '/api/v1/users/dtos')
             .then(function (response) {
                 $scope.LeaderList = response.data;
                 console.log('CONSOLE LOG GET');
