@@ -16,40 +16,29 @@
     <h1>Создание проекта:</h1>
     <br>
     <form novalidate ng-submit="SubmitCreateNewProject()">
-            <div class="form-group">
-                <label for="ProjectName">Название проекта</label>
-                <input type="text" ng-model="newProject.title" class="form-control" id="ProjectName" aria-describedby="newProject.title" placeholder="Введите название проекта">
+        <div class="form-group">
+            <label for="ProjectName">Название проекта</label>
+            <input type="text" ng-model="newProject.title" class="form-control" id="ProjectName"
+                   aria-describedby="newProject.title" placeholder="Введите название проекта">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Example select</label>
+            <select ng-model="newProject.leader.id" class="form-control" id="exampleFormControlSelect1">
+                <option type="number" ng-repeat="u in users" ng-value="u.id">{{u.username}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="inputDate">Введите дату:</label>
+            <input type="datetime-local" ng-model="newProject.deadline" class="form-control" id="inputDate">
+        </div>
+        <div class="form-group">
+            <div class="form-check form-check-inline" ng-repeat="u in users">
+                <input class="form-check-input" type="checkbox" id="newProjectUsers" ng-true-value="{{u.id}}" ng-model="newProject.users[u.id]">
+                <label class="form-check-label" for="newProjectUsers">{{u.username}}</label>
             </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select ng-model="newProject.leader.id" class="form-control" id="exampleFormControlSelect1">
-                    <option type="number" ng-repeat="l in LeaderList" ng-value="l.id">{{l.username}}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="inputDate">Введите дату:</label>
-                <input type="datetime-local" ng-model="newProject.deadline" class="form-control" id="inputDate">
-            </div>
-
-<!--            <div class="multiselect">-->
-<!--                <div class="selectBox" onclick="showCheckboxes()">-->
-<!--                    <select>-->
-<!--                        <option>Select an option</option>-->
-<!--                    </select>-->
-<!--                    <div class="overSelect"></div>-->
-<!--                </div>-->
-<!--                <div class="checkbox" ng-repeat="l in LeaderList" ng-model="newProject.user.id">-->
-<!--                ng-model="newProject.users.id"-->
-                <div class="checkbox" >
-<!--                <div class="form-control">-->
-                    <label ng-repeat="l in LeaderList">
-                        <input type="checkbox"  ng-model="NewUsers" ng-true-value="l.id" ng-false-value="0">
-                        {{l.username}}
-                    </label>
-                </div>
-<!--            </div>-->
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-        </form>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
 </div>
 </body>
 </html>

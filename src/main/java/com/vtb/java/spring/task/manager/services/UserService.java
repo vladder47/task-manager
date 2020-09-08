@@ -21,6 +21,10 @@ public class UserService {
         return userRepository.findAllUsersDto();
     }
 
+    public List<UserDto> findAllUsersByProjectId(Long id) {
+        return userRepository.findAllUsersByProjectId(id);
+    }
+
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }

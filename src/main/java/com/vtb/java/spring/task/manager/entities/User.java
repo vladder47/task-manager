@@ -47,5 +47,5 @@ public class User {
     @JoinTable(name = "users_projects",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private List<User> users;
-}
+    private List<User> projects;
+};
