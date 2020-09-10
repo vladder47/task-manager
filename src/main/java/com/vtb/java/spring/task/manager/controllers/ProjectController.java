@@ -8,6 +8,7 @@ import com.vtb.java.spring.task.manager.exceptions.ResourceNotFoundException;
 import com.vtb.java.spring.task.manager.services.ProjectService;
 import com.vtb.java.spring.task.manager.services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,20 +23,32 @@ public class ProjectController {
     private UserService userService;
 
     @GetMapping
-    public List<ProjectDto> getAllProjectsDto(){
-        return projectService.findAllProjectDto();
+    public Page<ProjectDto> getAllProjectsDto(@RequestParam(value = "page", defaultValue = "1") Integer page){
+        return projectService.findAllProjectDto(page - 1, 10);
     }
 
     @GetMapping("/{id}")
     public ProjectDto getProjectById(@PathVariable Long id){
-        return projectService.findProjectByIdDto(id);
+        return projectService.findProjectDtoById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Проект с id = %d не найден", id)));
     }
 
     @PostMapping(path = "/create",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public Project createNewProject(@RequestBody Project project){
-        System.out.println("project = " + project);
+
+    public Project createNewProject(@RequestBody Project project) {
+        if (project.getId() != null) {
+            project.setId(null);
+        }
         return projectService.saveOrUpdate(project);
+    }
+
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public void modifyProject(@RequestBody Project project) {
+        if (!projectService.existsById(project.getId())) {
+            throw new ResourceNotFoundException(String.format("Проект с id= %d не найден", project.getId()));
+        }
+        projectService.saveOrUpdate(project);
     }
 
     @GetMapping("/create")

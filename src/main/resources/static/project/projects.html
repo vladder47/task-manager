@@ -32,10 +32,25 @@
             <td>{{p.leaderUsername}}</td>
             <td>{{p.deadline}}</td>
             <td>{{p.createdAt}}</td>
-            <td><a class="btn btn-danger" href="#!/projects/{{p.id}}">Редактировать</a></td>
+            <td><a ng-href="#!/projects/edit/{{p.id}}">Изменить</a></td>
         </tr>
         </tbody>
     </table>
+
+    <nav aria-label="Project navigation">
+        <ul class="pagination" ng-if="page.totalPages > 1">
+            <li class="page-item" ng-class="{disabled:page.first}">
+                <a class="page-link" ng-click="findProjects(1)">Первая</a></li>
+            <li class="page-item" ng-class="{disabled:page.first}">
+                <a class="page-link" ng-click="findProjects(page.pageable.pageNumber)">Предыдущая</a></li>
+            <li class="page-item" ng-repeat="p in pages" ng-class="{active:page.pageable.pageNumber === p - 1}">
+                <a class="page-link" ng-click="findProjects(p)">{{p}}</a></li>
+            <li class="page-item" ng-class="{disabled:page.last}">
+                <a class="page-link" ng-click="findProjects(page.pageable.pageNumber + 2)">Следующая</a></li>
+            <li class="page-item" ng-class="{disabled:page.last}">
+                <a class="page-link" ng-click="findProjects(page.totalPages)">Последняя</a></li>
+        </ul>
+    </nav>
 
 </div>
 </body>
