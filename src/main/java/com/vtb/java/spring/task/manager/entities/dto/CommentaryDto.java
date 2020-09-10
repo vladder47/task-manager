@@ -11,7 +11,9 @@ public interface CommentaryDto {
 
     Long getTaskId();
 
-    Long getUsername();
+    String getUsername();
 
     LocalDateTime getCreatedAt();
+
+    Long getTotalCount();
 }

@@ -6,6 +6,7 @@ import com.vtb.java.spring.task.manager.repositories.TaskRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +21,16 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public Page<TaskDto> findAllTasksDto(Long projectId, int page, int size) {
+    public Page<TaskDto> findAllTasksDtoByProjectId(Long projectId, int page, int size) {
         return taskRepository.findAllTasksByProjectId(projectId, PageRequest.of(page, size));
+    }
+
+    public Page<TaskDto> findAllTasksDto(int page, int size, Specification<TaskDto> spec) {
+        return taskRepository.findAllTasks(PageRequest.of(page, size), spec);
+    }
+
+    public Page<Task> findAllTasks(int page, int size, Specification<Task> spec) {
+        return taskRepository.findAll(spec, PageRequest.of(page, size));
     }
 
     public Optional<TaskDto> findTaskDtoById(Long id) {

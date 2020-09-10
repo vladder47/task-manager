@@ -3,12 +3,10 @@ package com.vtb.java.spring.task.manager.entities;
 import lombok.Data;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -35,6 +33,18 @@ public class User {
 //            inverseJoinColumns = @JoinColumn(name = "role_id"))
 //    private Collection<Role> roles;
 
+    @ManyToMany
+    @JoinTable(name = "users_tasks",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id"))
+    private List<Task> tasks;
+
+    @ManyToMany
+    @JoinTable(name = "users_projects",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id"))
+    private List<User> projects;
+
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -42,10 +52,4 @@ public class User {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @ManyToMany
-    @JoinTable(name = "users_projects",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private List<User> projects;
 };

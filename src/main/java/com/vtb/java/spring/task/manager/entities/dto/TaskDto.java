@@ -10,6 +10,8 @@ public interface TaskDto {
 
     String getTitle();
 
+    Long getLeaderId();
+
     String getLeaderUsername();
 
     String getDescription();

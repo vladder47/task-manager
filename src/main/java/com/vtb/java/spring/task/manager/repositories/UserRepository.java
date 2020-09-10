@@ -17,4 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "join u.projects p where p.id = :id")
     List<UserDto> findAllUsersByProjectId(Long id);
 
+    @Query("select u.id as id, u.username as username from User u " +
+            "join u.tasks t where t.id = :id")
+    List<UserDto> findAllUsersByTaskId(Long id);
+
 }

@@ -31,4 +31,9 @@ public class UserController {
     public List<UserDto> getAllUsersDtoByProjectId(@PathVariable Long id) {
         return userService.findAllUsersByProjectId(id);
     }
+
+    @GetMapping("dtos/task/{id}")
+    public List<UserDto> getAllUsersDtoByTaskId(@PathVariable Long id) {
+        return userService.findAllUsersByTaskId(id);
+    }
 }

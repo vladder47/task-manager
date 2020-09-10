@@ -106,3 +106,10 @@ VALUES ('Task 1', 'Description 1', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
 INSERT INTO users_tasks (user_id, task_id)
 VALUES (1, 1),
        (1, 2);
+
+INSERT INTO commentary (text, user_id, task_id, parent)
+VALUES ('В течение дня будет готово!', 1, 1, 0),
+       ('Эта же задача уже была решена?', 2, 1, 0),
+       ('Нашел новый подход к реализации этой идеи', 1, 1, 0),
+       ('Сделано!', 2, 1, 0),
+       ('Отличный результат!', 2, 1, 0);

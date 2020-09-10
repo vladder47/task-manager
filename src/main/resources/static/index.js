@@ -28,5 +28,9 @@
                 templateUrl: 'task/task_page.html',
                 controller: 'taskPageController'
             })
+            .when('/tasks/edit/:taskId', {
+                templateUrl: 'task/edit_task.html',
+                controller: 'editTaskController'
+            })
     }
 })();
