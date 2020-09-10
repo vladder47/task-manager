@@ -10,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -69,7 +68,7 @@ public class Task {
     @JoinTable(name = "users_tasks",
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Collection<User> users;
+    private List<User> users;
 
     @OneToMany(mappedBy = "task")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)

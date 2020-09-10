@@ -28,6 +28,10 @@
                 templateUrl: 'registration/registration.html',
                 controller: 'registrationController'
             })
+            .when('/projects/edit/:projectId', {
+                templateUrl: 'project/edit_project.html',
+                controller: 'editProjectController'
+            })
             .when('/tasks', {
                 templateUrl: 'task/tasks.html',
                 controller: 'tasksController'
@@ -39,6 +43,10 @@
             .when('/tasks/:taskId', {
                 templateUrl: 'task/task_page.html',
                 controller: 'taskPageController'
+             })
+            .when('/tasks/edit/:taskId', {
+                templateUrl: 'task/edit_task.html',
+                controller: 'editTaskController'
             });
 
         // $httpProvider.interceptors.push(function ($q, $location) {

@@ -32,6 +32,14 @@ public class UserService implements UserDetailsService {
         return userRepository.findAllUsersDto();
     }
 
+    public List<UserDto> findAllUsersByProjectId(Long id) {
+        return userRepository.findAllUsersByProjectId(id);
+    }
+
+    public List<UserDto> findAllUsersByTaskId(Long id) {
+        return userRepository.findAllUsersByTaskId(id);
+    }
+
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }

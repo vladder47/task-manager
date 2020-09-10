@@ -6,8 +6,6 @@
     </div>
 <!--    todo С ДОБАВЛЕНИЕМ РЕГИСТРАЦИИ УБРАТЬ ЭТО ПОЛЕ!!!-->
     <div class="form-group col-md-6">
-<!--        <label for="newTaskLeaderId">Имя владельца</label>-->
-<!--        <input class="form-control" type="number" ng-model="newTask.leaderId" id="newTaskLeaderId">-->
         <label for="newTaskLeaderId">Имя владельца</label>
         <select ng-model="newTask.leader.id" class="form-control" id="newTaskLeaderId">
             <option type="number" ng-repeat="u in users" ng-value="u.id">{{u.username}}</option>
@@ -20,28 +18,24 @@
     <div class="form-group col-md-6">
         <label for="newTaskPriority">Приоритет</label>
         <select ng-model="newTask.priority" class="form-control" id="newTaskPriority">
-            <option type="text" value="PLANNING">В планах</option>
-            <option type="text" value="VERYLOW">Очень низкий</option>
-            <option type="text" value="LOW">Низкий</option>
-            <option type="text" value="MEDIUM">Средний</option>
-            <option type="text" value="HIGH">Высокий</option>
-            <option type="text" value="VERYHIGH">Очень высокий</option>
+            <option type="text" ng-repeat="(key, value) in priorities" ng-value="key">{{value}}</option>
         </select>
     </div>
     <div class="form-group col-md-6">
         <label for="newTaskStatus">Статус</label>
         <select ng-model="newTask.status" class="form-control" id="newTaskStatus">
-            <option type="text" value="CREATED">Создана</option>
-            <option type="text" value="INPROGRESS">В работе</option>
-            <option type="text" value="CHECKING">Передана на проверку</option>
-            <option type="text" value="RETURNED">Возвращена на доработку</option>
-            <option type="text" value="COMPLETED">Завершена</option>
-            <option type="text" value="CANCELED">Отменена</option>
+            <option type="text" ng-repeat="(key, value) in statuses" ng-value="key">{{value}}</option>
         </select>
     </div>
     <div class="form-group col-md-6">
         <label for="newTaskDeadline">Срок исполнения</label>
         <input class="form-control" type="date" ng-model="newTask.deadLine" id="newTaskDeadline">
+    </div>
+    <div class="form-group">
+        <div class="form-check form-check-inline" ng-repeat="u in users">
+            <input class="form-check-input" type="checkbox" id="newTaskUsers" ng-true-value="{{u.id}}" ng-model="newTask.users[u.id]">
+            <label class="form-check-label" for="newTaskUsers">{{u.username}}</label>
+        </div>
     </div>
     <div>
         <button class="btn btn-success" type="submit">Сохранить</button>

@@ -12,6 +12,14 @@ angular.module('app').controller('tasksController', function ($scope, $http, $ro
                 $scope.page = response.data;
                 $scope.projectId = projectId;
             });
+        $http.get(contextPath + '/api/v1/tasks/status')
+            .then(function (response) {
+                $scope.statuses = response.data;
+            });
+        $http.get(contextPath + '/api/v1/tasks/priority')
+            .then(function (response) {
+                $scope.priorities = response.data;
+            });
     };
 
     $scope.findTasks = function (pageNumber) {
