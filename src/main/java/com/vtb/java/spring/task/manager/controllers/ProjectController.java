@@ -3,6 +3,7 @@ package com.vtb.java.spring.task.manager.controllers;
 import com.vtb.java.spring.task.manager.entities.Project;
 import com.vtb.java.spring.task.manager.entities.User;
 import com.vtb.java.spring.task.manager.entities.dto.ProjectDto;
+import com.vtb.java.spring.task.manager.entities.dto.UserDto;
 import com.vtb.java.spring.task.manager.exceptions.ResourceNotFoundException;
 import com.vtb.java.spring.task.manager.services.ProjectService;
 import com.vtb.java.spring.task.manager.services.UserService;
@@ -17,13 +18,9 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("api/v1/projects")
 public class ProjectController {
+
     private ProjectService projectService;
     private UserService userService;
-
-//    @GetMapping
-//    public List<Project> getAllProjects(){
-//        return projectService.findAll();
-//    }
 
     @GetMapping
     public Page<ProjectDto> getAllProjectsDto(@RequestParam(value = "page", defaultValue = "1") Integer page){
@@ -38,6 +35,7 @@ public class ProjectController {
 
     @PostMapping(path = "/create",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
+
     public Project createNewProject(@RequestBody Project project) {
         if (project.getId() != null) {
             project.setId(null);
@@ -54,8 +52,12 @@ public class ProjectController {
     }
 
     @GetMapping("/create")
-    public List<User> getAllDtos(){
-        System.out.println(userService.findAll());
-        return userService.findAll();
+    public List<UserDto> getAllDtos(){
+        return userService.findAllUsersDto();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProjectById(@PathVariable Long id){
+        projectService.deleteById(id);
     }
 }

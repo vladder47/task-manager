@@ -14,24 +14,29 @@ values
 ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com'),
 ('John Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com');
 
-create table projects
-(
-    id         bigserial primary key,
-    title      varchar(30) not null,
-    leader_id  bigserial   not null references users (id),
-    deadline   timestamp without time zone,
-    created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp
+create table projects (
+    id                    bigserial primary key,
+    title                 varchar(30) not null,
+    leader_id             bigint not null references users(id),
+    deadline              date,
+    created_at          timestamp default current_timestamp,
+    updated_at          timestamp default current_timestamp
 );
 
-CREATE TABLE users_projects
+CREATE TABLE projects_users
 (
-    user_id    bigint not null,
-    project_id bigint not null,
-    primary key (user_id, project_id),
-    foreign key (user_id) references users (id),
-    foreign key (project_id) references projects (id)
+    project_id bigint not null references projects(id),
+    user_id    bigint not null references users(id),
+    primary key (user_id, project_id)
 );
+
+INSERT INTO projects_users (project_id, user_id)
+VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
+(2, 2);
 
 create table tasks
 (
@@ -81,7 +86,7 @@ INSERT INTO projects(title, leader_id)
 VALUES ('Project 1', 1),
        ('Project 2', 2);
 
-INSERT INTO users_projects (user_id, project_id)
+INSERT INTO projects_users (user_id, project_id)
 VALUES (1, 1),
        (1, 2),
        (2, 1),
@@ -108,6 +113,16 @@ VALUES ('Task 1', 'Description 1', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
        ('Task 15', 'Description 15', 'CHECKING', 'HIGH', 2, 2, '2020-09-05'),
        ('Task 16', 'Description 16', 'CHECKING', 'HIGH', 2, 2, '2020-09-05'),
        ('Task 17', 'Description 17', 'CHECKING', 'HIGH', 2, 2, '2020-09-05');
+
+CREATE TABLE files (id bigserial primary key,
+                    filename text not null,
+                    created_at timestamp default current_timestamp,
+                    updated_at timestamp default current_timestamp
+);
+
+INSERT INTO files (filename)
+VALUES  ('README.md'),
+        ('fileTest.txt');
 
 INSERT INTO users_tasks (user_id, task_id)
 VALUES (1, 1),

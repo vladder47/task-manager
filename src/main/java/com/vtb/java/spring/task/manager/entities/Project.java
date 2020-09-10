@@ -31,7 +31,7 @@ public class Project {
     private User leader;
 
     @ManyToMany
-    @JoinTable(name = "users_projects",
+    @JoinTable(name = "projects_users",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;

@@ -3,12 +3,14 @@ angular.module('app').controller('createProjectController', function ($scope, $h
     $scope.newProject = {};
 
     fillTable = function () {
+        console.log('CONSOLE LOG GET START');
         $http.get(contextPath + '/api/v1/users/dtos')
             .then(function (response) {
                 $scope.users = response.data;
                 console.log($scope.users);
             });
     };
+    fillTable();
 
     $scope.SubmitCreateNewProject = function (){
         let users = [];
@@ -22,7 +24,6 @@ angular.module('app').controller('createProjectController', function ($scope, $h
             .then(function (){
                 $window.location.href = contextPath + '/index.html';
             });
-    }
-    fillTable();
+    };
 
 });
