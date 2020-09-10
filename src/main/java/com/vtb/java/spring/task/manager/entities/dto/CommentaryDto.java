@@ -15,5 +15,4 @@ public interface CommentaryDto {
 
     LocalDateTime getCreatedAt();
 
-    Long getTotalCount();
 }

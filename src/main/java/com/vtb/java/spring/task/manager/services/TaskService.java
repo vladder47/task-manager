@@ -25,10 +25,6 @@ public class TaskService {
         return taskRepository.findAllTasksByProjectId(projectId, PageRequest.of(page, size));
     }
 
-    public Page<TaskDto> findAllTasksDto(int page, int size, Specification<TaskDto> spec) {
-        return taskRepository.findAllTasks(PageRequest.of(page, size), spec);
-    }
-
     public Page<Task> findAllTasks(int page, int size, Specification<Task> spec) {
         return taskRepository.findAll(spec, PageRequest.of(page, size));
     }

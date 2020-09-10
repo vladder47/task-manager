@@ -19,7 +19,7 @@ angular.module('app').controller('createProjectController', function ($scope, $h
         }
         $scope.newProject.users = users;
         $http.post(contextPath + '/api/v1/projects/create', $scope.newProject)
-            .then(function (response){
+            .then(function (){
                 $window.location.href = contextPath + '/index.html';
             });
     }

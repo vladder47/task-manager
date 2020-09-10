@@ -16,6 +16,10 @@
                 templateUrl: 'project/create-project.html',
                 controller: 'createProjectController'
             })
+            .when('/projects/edit/:projectId', {
+                templateUrl: 'project/edit_project.html',
+                controller: 'editProjectController'
+            })
             .when('/tasks', {
                 templateUrl: 'task/tasks.html',
                 controller: 'tasksController'
@@ -31,6 +35,6 @@
             .when('/tasks/edit/:taskId', {
                 templateUrl: 'task/edit_task.html',
                 controller: 'editTaskController'
-            })
+            });
     }
 })();
