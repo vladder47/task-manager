@@ -2,12 +2,12 @@ package com.vtb.java.spring.task.manager.services;
 
 import com.vtb.java.spring.task.manager.entities.Project;
 import com.vtb.java.spring.task.manager.entities.dto.ProjectDto;
+import com.vtb.java.spring.task.manager.exceptions.ResourceNotFoundException;
 import com.vtb.java.spring.task.manager.repositories.ProjectRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,11 +22,22 @@ public class ProjectService {
         return projectRepository.findAllProjectsDto();
     }
 
-    public Optional<Project> findById(Long id){
-        return projectRepository.findById(id);
+    public Project findById(Long id){
+        return projectRepository.findById(id).orElseThrow();
+//        return projectRepository
+//                .findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Проект с id = %d не найден", id)));
+    }
+
+    public ProjectDto findProjectByIdDto(Long id){
+        return projectRepository.findProjectByIdDto(id);
+//                .orElseThrow(() -> new ResourceNotFoundException("Проект с id = " + id + " не найден"));
     }
 
     public Project saveOrUpdate(Project project){
         return projectRepository.save(project);
+    }
+
+    public void deleteById(Long id) {
+        projectRepository.deleteById(id);
     }
 }

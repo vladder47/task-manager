@@ -15,8 +15,8 @@ values
 create table projects (
     id                    bigserial primary key,
     title                 varchar(30) not null,
-    leader_id             bigserial not null references users(id),
-    deadline              timestamp without time zone,
+    leader_id             bigint not null references users(id),
+    deadline              date,
     created_at          timestamp default current_timestamp,
     updated_at          timestamp default current_timestamp
 );
@@ -25,16 +25,14 @@ VALUES
 ('Project 1', 1, '2020-09-30'),
 ('Project 2', 3, '2010-08-22');
 
-CREATE TABLE users_projects
+CREATE TABLE projects_users
 (
-    user_id    bigint not null,
-    project_id bigint not null,
-    primary key (user_id, project_id),
-    foreign key (user_id) references users (id),
-    foreign key (project_id) references projects (id)
+    project_id bigint not null references projects(id),
+    user_id    bigint not null references users(id),
+    primary key (user_id, project_id)
 );
 
-INSERT INTO users_projects (project_id, user_id)
+INSERT INTO projects_users (project_id, user_id)
 VALUES
 (1, 1),
 (1, 2),
@@ -78,14 +76,6 @@ create table commentary
     foreign key (task_id) references tasks (id)
 );
 
-INSERT INTO users(username, password, email)
-VALUES ('Vladislav', 'qwerty', 'vladisdrozdov@gmail.com'),
-       ('Andrey', 'qwerty', 'asdfghrewq@gmail.com');
-
-INSERT INTO projects(title, leader_id)
-VALUES ('Project 1', 1),
-       ('Project 2', 2);
-
 INSERT INTO tasks (title, description, status, priority, leader_id, project_id, deadline)
 VALUES ('Task 1', 'Description 1', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
        ('Task 2', 'Description 2', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
@@ -95,3 +85,13 @@ VALUES ('Task 1', 'Description 1', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
        ('Task 6', 'Description 6', 'CREATED', 'PLANNING', 2, 2, '2020-09-05'),
        ('Task 7', 'Description 7', 'CREATED', 'PLANNING', 2, 2, '2020-09-05'),
        ('Task 8', 'Description 8', 'CREATED', 'PLANNING', 2, 2, '2020-09-05');
+
+CREATE TABLE files (id bigserial primary key,
+                    filename text not null,
+                    created_at timestamp default current_timestamp,
+                    updated_at timestamp default current_timestamp
+);
+
+INSERT INTO files (filename)
+VALUES  ('README.md'),
+        ('fileTest.txt');

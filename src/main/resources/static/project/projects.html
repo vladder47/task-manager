@@ -16,19 +16,23 @@
     <h1>Проекты:</h1>
     <br>
     <a class="btn btn-outline-warning" href="#!/projects/create">Создать проект</a>
+    <br>
+    <br>
     <table class="table table-hover" cellpadding="0" cellspacing="0">
         <tr>
             <td>Название</td>
             <td>Имя руководителя</td>
-            <td>Время создание</td>
             <td>Время сдачи</td>
+            <td>Время создание</td>
+            <td>Действие</td>
         </tr>
         <tbody>
         <tr ng-repeat="p in ProjectsList">
             <td><a ng-href="#!/tasks?project={{p.id}}">{{p.title}}</a></td>
             <td>{{p.leaderUsername}}</td>
-            <td>{{p.createdAt}}</td>
             <td>{{p.deadline}}</td>
+            <td>{{p.createdAt}}</td>
+            <td><a class="btn btn-danger" href="#!/projects/{{p.id}}">Редактировать</a></td>
         </tr>
         </tbody>
     </table>

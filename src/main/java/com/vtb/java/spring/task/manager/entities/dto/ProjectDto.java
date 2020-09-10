@@ -1,7 +1,9 @@
 package com.vtb.java.spring.task.manager.entities.dto;
 
+import com.vtb.java.spring.task.manager.entities.User;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 public interface ProjectDto {
     Long getId();
@@ -10,7 +12,9 @@ public interface ProjectDto {
 
     String getLeaderUsername();
 
+    List<User> getUsers();
+
     LocalDate getCreatedAt();
 
-    LocalDateTime getDeadline();
+    LocalDate getDeadline();
 }

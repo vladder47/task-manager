@@ -1,0 +1,24 @@
+<div>
+    <h1>Проект № {{ProjectProperty.id}}:</h1>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Id Проекта</td>
+            <td>Название проекта</td>
+            <td>Имя владельца</td>
+            <td>Описание</td>
+            <td>Срок исполнения</td>
+            <td>Исполнители</td>
+        </tr>
+        <tbody>
+        <tr>
+            <td>{{ProjectProperty.id}}</td>
+            <td>{{ProjectProperty.title}}</td>
+            <td>{{ProjectProperty.leaderUsername}}</td>
+            <td>{{ProjectProperty.deadline}}</td>
+            <td>{{ProjectProperty.users}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <button ng-click="deleteProject(ProjectProperty.id)" type="submit" class="btn btn-danger" href="#!/projects/{{ProjectProperty.id}}">Удалить проект</button>
+
+</div>

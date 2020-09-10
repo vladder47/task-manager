@@ -16,6 +16,10 @@
                 templateUrl: 'project/create-project.html',
                 controller: 'createProjectController'
             })
+            .when('/projects/:projectId', {
+                templateUrl: 'project/edit-project.html',
+                controller: 'editProjectController',
+            })
             .when('/tasks', {
                 templateUrl: 'task/tasks.html',
                 controller: 'tasksController'
