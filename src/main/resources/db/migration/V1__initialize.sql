@@ -6,11 +6,12 @@ create table users (
   created_at          timestamp default current_timestamp,
   updated_at          timestamp default current_timestamp
 );
+
 insert into users (username, password, email)
 values
-('Bob Johnson', '123', 'bob_johnson@gmail.com'),
-('user', '123', 'user@gmail.com'),
-('John Johnson', '321', 'john_johnson@gmail.com');
+('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob_johnson@gmail.com'),
+('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com'),
+('John Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com');
 
 create table projects (
     id                    bigserial primary key,
