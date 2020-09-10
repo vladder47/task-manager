@@ -33,12 +33,12 @@ public class TaskController {
 //        return taskService.findAllTasksDto(page - 1, 10, taskFilter.getSpec());
 //    }
 
-    @GetMapping("/all")
-    public Page<Task> getAllTasks(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                  @RequestParam(required = false) Map<String, String> params) {
-        TaskFilter taskFilter = new TaskFilter(params);
-        return taskService.findAllTasks(page - 1, 10, taskFilter.getSpec());
-    }
+//    @GetMapping("/all")
+//    public Page<Task> getAllTasks(@RequestParam(value = "page", defaultValue = "1") Integer page,
+//                                  @RequestParam(required = false) Map<String, String> params) {
+//        TaskFilter taskFilter = new TaskFilter(params);
+//        return taskService.findAllTasks(page - 1, 10, taskFilter.getSpec());
+//    }
 
     @GetMapping("/{id}")
     public TaskDto getTaskById(@PathVariable Long id) {

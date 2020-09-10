@@ -8,12 +8,6 @@ create table users
     updated_at timestamp default current_timestamp
 );
 
-insert into users (username, password, email)
-values
-('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob_johnson@gmail.com'),
-('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com'),
-('John Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com');
-
 create table projects (
     id                    bigserial primary key,
     title                 varchar(30) not null,
@@ -30,13 +24,13 @@ CREATE TABLE projects_users
     primary key (user_id, project_id)
 );
 
-INSERT INTO projects_users (project_id, user_id)
-VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(2, 1),
-(2, 2);
+-- INSERT INTO projects_users (project_id, user_id)
+-- VALUES
+-- (1, 1),
+-- (1, 2),
+-- (1, 3),
+-- (2, 1),
+-- (2, 2);
 
 create table tasks
 (
@@ -76,9 +70,9 @@ create table commentary
 );
 
 insert into users (username, password, email)
-values ('Bob Johnson', '123', 'bob_johnson@gmail.com'),
-       ('user', '123', 'user@gmail.com'),
-       ('John Johnson', '321', 'john_johnson@gmail.com'),
+values ('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob_johnson@gmail.com'),
+       ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com'),
+       ('John Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com'),
        ('Vladislav', 'qwerty', 'vladisdrozdov@gmail.com'),
        ('Andrey', 'qwerty', 'asdfghrewq@gmail.com');
 

@@ -32,7 +32,7 @@ public class User {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private List<Role> roles;
 
     @ManyToMany
     @JoinTable(name = "users_tasks",
@@ -41,7 +41,7 @@ public class User {
     private List<Task> tasks;
 
     @ManyToMany
-    @JoinTable(name = "users_projects",
+    @JoinTable(name = "projects_users",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
     private List<User> projects;
