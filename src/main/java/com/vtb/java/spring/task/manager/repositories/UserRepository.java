@@ -7,11 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u.id as id, u.username as username from User u")
     List<UserDto> findAllUsersDto();
+
+    Optional<User> findByUsername(String username);
 
     @Query("select u.id as id, u.username as username from User u " +
             "join u.projects p where p.id = :id")
