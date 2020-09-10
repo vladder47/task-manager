@@ -37,7 +37,7 @@ public class Project {
     private List<User> users;
 
     @Column(name = "deadline")
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 
     @OneToMany(mappedBy = "project")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
