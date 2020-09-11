@@ -15,3 +15,5 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
         temp:
           use_jdbc_metadata_defaults: false
+jwt:
+  secret: tg5g98h45g98h45g9845hg98hf9834hf9834hjheriheriuher9g8h384y5934yhhtertg

@@ -8,9 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -29,7 +28,7 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "leader_id")
-    private User user;
+    private User leader;
 
     @ManyToMany
     @JoinTable(name = "projects_users",
@@ -38,7 +37,7 @@ public class Project {
     private List<User> users;
 
     @Column(name = "deadline")
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 
     @OneToMany(mappedBy = "project")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
@@ -46,9 +45,9 @@ public class Project {
 
     @CreationTimestamp
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDate updatedAt;
 }

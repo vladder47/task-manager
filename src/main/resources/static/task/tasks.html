@@ -4,7 +4,7 @@
         <tr>
             <td>Id задачи</td>
             <td>Название</td>
-            <td>Id владельца</td>
+            <td>Имя владельца</td>
             <td>Описание</td>
             <td>Название проекта</td>
             <td>Приоритет</td>
@@ -15,18 +15,19 @@
         <tr ng-repeat="t in TasksList">
             <td>{{t.id}}</td>
             <td><a ng-href="#!/tasks/{{t.id}}">{{t.title}}</a></td>
-            <td>{{t.leaderId}}</td>
+            <td>{{t.leaderUsername}}</td>
             <td>{{t.description}}</td>
-            <td>{{t.project.title}}</td>
-            <td>{{t.priority}}</td>
-            <td>{{t.status}}</td>
-            <td>{{t.deadLine}}</td>
+            <td>{{t.projectTitle}}</td>
+            <td>{{priorities[t.priority]}}</td>
+            <td>{{statuses[t.status]}}</td>
+            <td>{{t.deadline}}</td>
         </tr>
         </tbody>
     </table>
 
     <a class="btn btn-info" ng-href="#!/tasks/create/{{projectId}}">Добавить задачу</a>
-
+    <br>
+    <br>
     <nav aria-label="Task navigation">
         <ul class="pagination" ng-if="page.totalPages > 1">
             <li class="page-item" ng-class="{disabled:page.first}">

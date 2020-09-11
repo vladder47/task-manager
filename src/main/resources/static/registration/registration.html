@@ -1,0 +1,19 @@
+<h3>Регистрация</h3>
+<form novalidate ng-submit="createNewUser()">
+    <div class="form-group col-md-6">
+        <label for="newUserName">Имя</label>
+        <input class="form-control" type="text" ng-model="newUser.username" id="newUserName">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="newUserEmail">Почта</label>
+        <input class="form-control" type="text" ng-model="newUser.email" id="newUserEmail">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="newUserPassword">Пароль</label>
+        <input class="form-control" type="text" ng-model="newUser.password" id="newUserPassword">
+    </div>
+<!--    Добавить поле passwordConfirm и сравнивать с password на идентичность-->
+    <div>
+        <button class="btn btn-success" type="submit">Сохранить</button>
+    </div>
+</form>

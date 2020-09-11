@@ -1,6 +1,5 @@
 package com.vtb.java.spring.task.manager.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -11,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -28,8 +26,7 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "leader_id")
-    private User user;
-//    private Long leaderId;
+    private User leader;
 
     @Column(name = "description")
     private String description;
@@ -71,11 +68,10 @@ public class Task {
     @JoinTable(name = "users_tasks",
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Collection<User> users;
+    private List<User> users;
 
     @OneToMany(mappedBy = "task")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JsonIgnore
     private List<Commentary> commentaries;
 
     @CreationTimestamp

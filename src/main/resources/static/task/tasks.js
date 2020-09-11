@@ -12,12 +12,13 @@ angular.module('app').controller('tasksController', function ($scope, $http, $ro
                 $scope.page = response.data;
                 $scope.projectId = projectId;
             });
-    };
-
-    getTask = function (taskId) {
-        $http.get(contextPath + '/api/v1/tasks/' + taskId)
+        $http.get(contextPath + '/api/v1/tasks/status')
             .then(function (response) {
-                $scope.task = response.data.content;
+                $scope.statuses = response.data;
+            });
+        $http.get(contextPath + '/api/v1/tasks/priority')
+            .then(function (response) {
+                $scope.priorities = response.data;
             });
     };
 
