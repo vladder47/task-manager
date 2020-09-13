@@ -2,6 +2,8 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
     const contextPath = 'http://localhost:8189/app';
     $scope.editTask = {};
     $scope.editTask.project = {};
+    $scope.notification = {};
+    $scope.notification.users = {};
     $scope.editTask.leader = {};
 
     fillTable = function (taskId) {
@@ -24,6 +26,7 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
                                 $scope.editTask.priority = $scope.task.priority;
                                 $scope.editTask.status = $scope.task.status;
                                 $scope.editTask.project.id = $scope.task.projectId;
+                                $scope.notification.text = "Task " + $scope.task.id + " was changed";
                                 $scope.currentUser = $localStorage.currentUser;
                             });
                     });
@@ -66,9 +69,14 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
         // в случае, если изменение даты не происходит, то поле считается null,
         // поэтому приходится доставать его вручную
         $scope.editTask.deadLine = new Date(document.getElementById("editTaskDeadline").value);
+        $scope.notification.users = $scope.editTask.users;
         $http.put(contextPath + '/api/v1/tasks', $scope.editTask)
             .then(function () {
-                $window.location.href = contextPath + '/index.html';
+                console.log($scope.notification.users);
+                $http.post(contextPath + '/api/v1/notifications', $scope.notification)
+                    .then(function () {
+                        $window.location.href = contextPath + '/index.html';
+                    });
             });
     };
 

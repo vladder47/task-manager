@@ -3,6 +3,9 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
     $scope.newComment = {};
     $scope.newComment.task = {};
     $scope.newComment.user = {};
+    $scope.notification = {};
+    $scope.notification.users = [];
+    $scope.notification.text = {};
 
     getTask = function (taskId) {
         $http.get(contextPath + '/api/v1/tasks/' + taskId)
@@ -34,10 +37,28 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
         $scope.newComment.parent = 0;
         $http.post(contextPath + '/api/v1/comments', $scope.newComment)
             .then(function () {
+                $http.get(contextPath + '/api/v1/users/current')
+                    .then(function (response) {
+                        $scope.notification.users.push({'id': response.data.id});
+                        $scope.notification.text = "На ваш комментарий ответил " + $localStorage.currentUser.username;
+                        $http.post(contextPath + '/api/v1/notifications', $scope.notification)
+                            .then(function() {
+
+                            });
+                    });
                 getTask($routeParams.taskId);
                 $scope.newComment.text = null;
             });
     };
+
+    parseComment = function (text){
+        if (text[0] !== '@'){
+            return null;
+        }
+        var i = text.indexOf(' ');
+        var name = text.substr(1, i);
+        return name;
+    }
 
     getTask($routeParams.taskId);
 });

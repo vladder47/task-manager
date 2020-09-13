@@ -8,6 +8,27 @@ create table users
     updated_at timestamp default current_timestamp
 );
 
+create table roles (
+    id                    serial,
+    name                  varchar(50) not null,
+    created_at            timestamp default current_timestamp,
+    updated_at            timestamp default current_timestamp,
+    primary key (id)
+);
+
+CREATE TABLE users_roles (
+    user_id               bigint not null,
+    role_id               int not null,
+    primary key (user_id, role_id),
+    foreign key (user_id) references users (id),
+    foreign key (role_id) references roles (id)
+);
+
+insert into roles (name)
+values
+('ROLE_USER');
+
+
 create table projects (
     id                    bigserial primary key,
     title                 varchar(30) not null,
@@ -76,6 +97,8 @@ values ('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3
        ('Vladislav', 'qwerty', 'vladisdrozdov@gmail.com'),
        ('Andrey', 'qwerty', 'asdfghrewq@gmail.com');
 
+insert into users_roles (user_id, role_id) values (2, 1);
+
 INSERT INTO projects(title, leader_id)
 VALUES ('Project 1', 1),
        ('Project 2', 2),
@@ -123,7 +146,8 @@ VALUES  ('README.md'),
 
 INSERT INTO users_tasks (user_id, task_id)
 VALUES (1, 1),
-       (1, 2);
+       (1, 2),
+       (2, 1);
 
 INSERT INTO commentary (text, user_id, task_id, parent)
 VALUES ('В течение дня будет готово!', 1, 1, 0),
@@ -131,3 +155,20 @@ VALUES ('В течение дня будет готово!', 1, 1, 0),
        ('Нашел новый подход к реализации этой идеи', 1, 1, 0),
        ('Сделано!', 2, 1, 0),
        ('Отличный результат!', 2, 1, 0);
+
+create table notifications
+(
+    id         bigserial primary key,
+    text       varchar(255),
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
+);
+
+CREATE TABLE notifications_users
+(
+    user_id bigint not null,
+    notification_id bigint not null,
+    primary key (user_id, notification_id),
+    foreign key (user_id) references users (id),
+    foreign key (notification_id) references notifications (id)
+);

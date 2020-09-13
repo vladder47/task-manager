@@ -1,11 +1,13 @@
 package com.vtb.java.spring.task.manager.services;
 
+import com.vtb.java.spring.task.manager.entities.Notification;
 import com.vtb.java.spring.task.manager.entities.Role;
 import com.vtb.java.spring.task.manager.entities.Task;
 import com.vtb.java.spring.task.manager.entities.User;
 import com.vtb.java.spring.task.manager.entities.dto.UserDto;
 import com.vtb.java.spring.task.manager.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -57,10 +59,24 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    public Optional<UserDto> findDtoByUsername(String username) {
+        return userRepository.findDtoByUsername(username);
+    }
+
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format("User '%s' not found", username)));
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new HashSet<GrantedAuthority>());
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    public void setNotification(Notification notification, Long id){
+        User user = userRepository.findById(id).get();
+        user.getNotifications().add(notification);
     }
 }

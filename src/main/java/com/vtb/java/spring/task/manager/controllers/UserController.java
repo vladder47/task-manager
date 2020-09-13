@@ -44,4 +44,11 @@ public class UserController {
     public List<UserDto> getAllUsersDtoByTaskId(@PathVariable Long id) {
         return userService.findAllUsersByTaskId(id);
     }
+
+    @GetMapping("/current")
+    public UserDto getUserDtoByUsername(Principal principal) {
+        return userService.findDtoByUsername(principal.getName())
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Пользователь с именем = %s не найден", principal.getName())));
+    }
+
 }
