@@ -19,8 +19,7 @@ angular.module('app').controller('editProjectController', function ($scope, $htt
                                 $scope.editProject.title = $scope.project.title;
                                 $scope.editProject.leader.id = $scope.project.leaderId;
                                 $scope.editProject.users = setUsers($scope.projectUsers, $scope.users);
-                                $scope.notification.text = "Project " + $scope.project.id + " was changed";
-                                console.log($scope.editProject);
+                                $scope.notification.text = "Проект " + $scope.project.id + " был изменен";
                             });
                     });
             });
@@ -58,7 +57,6 @@ angular.module('app').controller('editProjectController', function ($scope, $htt
         $scope.notification.users = $scope.editProject.users;
         $http.put(contextPath + '/api/v1/projects', $scope.editProject)
             .then(function () {
-                console.log($scope.notification.users);
                 $http.post(contextPath + '/api/v1/notifications', $scope.notification)
                     .then(function () {
                         $window.location.href = contextPath + '/index.html';

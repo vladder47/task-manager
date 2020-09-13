@@ -9,7 +9,6 @@ angular.module('app').controller('createTaskController', function ($scope, $http
         $http.get(contextPath + '/api/v1/users/dtos/project/' + projectId)
             .then(function (response) {
                 $scope.users = response.data;
-                console.log($scope.users);
             });
         $http.get(contextPath + '/api/v1/tasks/status')
             .then(function (response) {

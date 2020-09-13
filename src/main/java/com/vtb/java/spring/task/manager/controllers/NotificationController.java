@@ -1,8 +1,6 @@
 package com.vtb.java.spring.task.manager.controllers;
 
 import com.vtb.java.spring.task.manager.entities.Notification;
-import com.vtb.java.spring.task.manager.entities.User;
-import com.vtb.java.spring.task.manager.entities.dto.CommentaryDto;
 import com.vtb.java.spring.task.manager.entities.dto.NotificationDto;
 import com.vtb.java.spring.task.manager.services.NotificationService;
 import lombok.AllArgsConstructor;

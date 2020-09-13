@@ -1,7 +1,6 @@
 package com.vtb.java.spring.task.manager.controllers;
 
 import com.vtb.java.spring.task.manager.configs.JwtTokenUtil;
-import com.vtb.java.spring.task.manager.entities.Task;
 import com.vtb.java.spring.task.manager.entities.dto.JwtRequest;
 import com.vtb.java.spring.task.manager.entities.dto.JwtResponse;
 import com.vtb.java.spring.task.manager.exceptions.TaskManagerServiceError;
@@ -14,7 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

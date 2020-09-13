@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,19 +19,22 @@ public class User {
     private Long id;
 
     @Column(name = "username")
+    @Size(min = 5, max = 30)
     private String username;
 
     @Column(name = "password")
+    @Size(min = 3, max = 80)
     private String password;
 
     @Column(name = "email")
+    @Size(min = 5, max = 50)
     private String email;
 
-//    @ManyToMany
-//    @JoinTable(name = "users_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private List<Role> roles;
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 
     @ManyToMany
     @JoinTable(name = "users_tasks",

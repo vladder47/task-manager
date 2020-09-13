@@ -1,7 +1,6 @@
 package com.vtb.java.spring.task.manager.services;
 
 import com.vtb.java.spring.task.manager.entities.Task;
-import com.vtb.java.spring.task.manager.entities.User;
 import com.vtb.java.spring.task.manager.entities.dto.TaskDto;
 import com.vtb.java.spring.task.manager.entities.filtering.dto.TaskFilterDto;
 import com.vtb.java.spring.task.manager.entities.filtering.mapper.TaskMapper;

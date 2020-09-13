@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,6 +23,7 @@ public class File {
     private Long id;
 
     @Column(name = "filename")
+    @NotNull
     private String fileName;
 
     @CreationTimestamp

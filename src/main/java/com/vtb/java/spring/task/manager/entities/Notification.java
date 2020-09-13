@@ -1,13 +1,12 @@
 package com.vtb.java.spring.task.manager.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.aspectj.weaver.ast.Not;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,6 +21,7 @@ public class Notification {
     private Long id;
 
     @Column(name = "text")
+    @Size(min = 3, max = 255)
     private String text;
 
     @ManyToMany

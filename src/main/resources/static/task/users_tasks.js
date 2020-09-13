@@ -63,7 +63,6 @@ angular.module('app').controller('usersTasksController', function ($scope, $http
         return result;
     }
 
-    // google's pagination logic (в строке навигации одновременно отображаются не более 10 страниц)
     function getPager(totalPages, currentPage) {
         currentPage = currentPage || 1;
 

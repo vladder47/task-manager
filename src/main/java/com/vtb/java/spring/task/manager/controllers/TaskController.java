@@ -33,7 +33,7 @@ public class TaskController {
     @GetMapping("/all")
     public Page<TaskFilterDto> getAllTasks(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                            @RequestParam(required = false) MultiValueMap<String, String> params,
-                                           @RequestParam(defaultValue = "id,desc") String[] sort,
+                                           @RequestParam(defaultValue = "id,asc") String[] sort,
                                            Principal principal) {
         params.add("auth", principal.getName());
         TaskFilter taskFilter = new TaskFilter(params);

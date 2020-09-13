@@ -62,7 +62,6 @@
                 'responseError': function(rejection, $localStorage, $http) {
                     var defer = $q.defer();
                     if (rejection.status == 401 || rejection.status == 403) {
-                        console.log('error: 401-403');
                         $location.path('/auth');
                         delete $localStorage.currentUser;
                         $http.defaults.headers.common.Authorization = '';

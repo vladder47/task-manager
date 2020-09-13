@@ -1,7 +1,5 @@
 package com.vtb.java.spring.task.manager.entities.dto;
 
-import com.vtb.java.spring.task.manager.entities.User;
-
 import java.time.LocalDate;
 
 public interface ProjectDto {

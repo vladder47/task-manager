@@ -2,12 +2,10 @@ package com.vtb.java.spring.task.manager.services;
 
 import com.vtb.java.spring.task.manager.entities.Notification;
 import com.vtb.java.spring.task.manager.entities.Role;
-import com.vtb.java.spring.task.manager.entities.Task;
 import com.vtb.java.spring.task.manager.entities.User;
 import com.vtb.java.spring.task.manager.entities.dto.UserDto;
 import com.vtb.java.spring.task.manager.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,11 +55,6 @@ public class UserService implements UserDetailsService {
     public User saveUser(User user){
         return userRepository.save(user);
     }
-
-    public Optional<UserDto> findDtoByUsername(String username) {
-        return userRepository.findDtoByUsername(username);
-    }
-
 
     @Override
     @Transactional

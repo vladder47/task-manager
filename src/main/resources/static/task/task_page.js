@@ -37,15 +37,17 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
         $scope.newComment.parent = 0;
         $http.post(contextPath + '/api/v1/comments', $scope.newComment)
             .then(function () {
-                $http.get(contextPath + '/api/v1/users/current')
-                    .then(function (response) {
-                        $scope.notification.users.push({'id': response.data.id});
-                        $scope.notification.text = "На ваш комментарий ответил " + $localStorage.currentUser.username;
-                        $http.post(contextPath + '/api/v1/notifications', $scope.notification)
-                            .then(function() {
+                if (parseComment($scope.newComment.text) !== null) {
+                    $http.get(contextPath + '/api/v1/users/current')
+                        .then(function (response) {
+                            $scope.notification.users.push({'id': response.data.id});
+                            $scope.notification.text = "На ваш комментарий ответил " + $localStorage.currentUser.username;
+                            $http.post(contextPath + '/api/v1/notifications', $scope.notification)
+                                .then(function() {
 
-                            });
-                    });
+                                });
+                        });
+                }
                 getTask($routeParams.taskId);
                 $scope.newComment.text = null;
             });

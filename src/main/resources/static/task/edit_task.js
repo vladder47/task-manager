@@ -17,7 +17,6 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
                             .then(function (response) {
                                 $scope.taskUsers = response.data;
                                 $scope.editTask.users = setUsers($scope.taskUsers, $scope.users);
-                                console.log($scope.editTask.users);
                                 $scope.editTask.id = $scope.task.id;
                                 $scope.editTask.title = $scope.task.title;
                                 $scope.editTask.leader = {};
@@ -26,7 +25,7 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
                                 $scope.editTask.priority = $scope.task.priority;
                                 $scope.editTask.status = $scope.task.status;
                                 $scope.editTask.project.id = $scope.task.projectId;
-                                $scope.notification.text = "Task " + $scope.task.id + " was changed";
+                                $scope.notification.text = "Задача " + $scope.task.id + " была изменена";
                                 $scope.currentUser = $localStorage.currentUser;
                             });
                     });
@@ -72,7 +71,6 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
         $scope.notification.users = $scope.editTask.users;
         $http.put(contextPath + '/api/v1/tasks', $scope.editTask)
             .then(function () {
-                console.log($scope.notification.users);
                 $http.post(contextPath + '/api/v1/notifications', $scope.notification)
                     .then(function () {
                         $window.location.href = contextPath + '/index.html';
