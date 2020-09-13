@@ -3,6 +3,7 @@ angular.module('app').controller('editProjectController', function ($scope, $htt
     $scope.editProject = {};
     $scope.notification = {};
     $scope.notification.users = {};
+    $scope.editProject.leader = {};
 
     fillTable = function (projectId) {
         $http.get(contextPath + '/api/v1/projects/' + projectId)
@@ -16,7 +17,6 @@ angular.module('app').controller('editProjectController', function ($scope, $htt
                                 $scope.projectUsers = response.data;
                                 $scope.editProject.id = $scope.project.id;
                                 $scope.editProject.title = $scope.project.title;
-                                $scope.editProject.leader = {};
                                 $scope.editProject.leader.id = $scope.project.leaderId;
                                 $scope.editProject.users = setUsers($scope.projectUsers, $scope.users);
                                 $scope.notification.text = "Project " + $scope.project.id + " was changed";

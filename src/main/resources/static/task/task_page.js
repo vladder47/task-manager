@@ -1,4 +1,4 @@
-angular.module('app').controller('taskPageController', function ($scope, $http, $routeParams, $localStorage, $window) {
+angular.module('app').controller('taskPageController', function ($scope, $http, $routeParams, $localStorage) {
     const contextPath = 'http://localhost:8189/app';
     $scope.newComment = {};
     $scope.newComment.task = {};
@@ -6,7 +6,6 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
     $scope.notification = {};
     $scope.notification.users = [];
     $scope.notification.text = {};
-
 
     getTask = function (taskId) {
         $http.get(contextPath + '/api/v1/tasks/' + taskId)
@@ -30,7 +29,6 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
         $http.get(contextPath + '/api/v1/users/current')
             .then(function (response) {
                 $scope.newComment.user.id = response.data.id;
-                console.log($scope.newComment.user.id);
             });
     };
 
@@ -49,6 +47,7 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
                             });
                     });
                 getTask($routeParams.taskId);
+                $scope.newComment.text = null;
             });
     };
 

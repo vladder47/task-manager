@@ -16,6 +16,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsername(String username);
 
+    @Query("select u.id as id, u.username as username from User u" +
+            " where u.username = :username")
+    Optional<UserDto> findDtoByUsername(String username);
+
     @Query("select u.id as id, u.username as username from User u " +
             "join u.projects p where p.id = :id")
     List<UserDto> findAllUsersByProjectId(Long id);
