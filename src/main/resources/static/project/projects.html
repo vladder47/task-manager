@@ -23,7 +23,6 @@
             <td>Название</td>
             <td>Имя руководителя</td>
             <td>Время сдачи</td>
-            <td>Время создание</td>
             <td>Действие</td>
         </tr>
         <tbody>
@@ -31,8 +30,7 @@
             <td><a ng-href="#!/tasks?project={{p.id}}">{{p.title}}</a></td>
             <td>{{p.leaderUsername}}</td>
             <td>{{p.deadline}}</td>
-            <td>{{p.createdAt}}</td>
-            <td><a ng-href="#!/projects/edit/{{p.id}}">Изменить</a></td>
+            <td><a ng-href="#!/projects/edit/{{p.id}}" ng-hide="p.leaderUsername != currentUser.username">Изменить</a></td>
         </tr>
         </tbody>
     </table>

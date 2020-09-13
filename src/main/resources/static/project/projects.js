@@ -1,4 +1,4 @@
-angular.module('app').controller('projectsController', function ($scope, $http, $routeParams) {
+angular.module('app').controller('projectsController', function ($scope, $http, $routeParams, $localStorage) {
     const contextPath = 'http://localhost:8189/app';
 
     fillTable = function (pageNumber) {
@@ -10,6 +10,7 @@ angular.module('app').controller('projectsController', function ($scope, $http, 
                 $scope.ProjectsList = response.data.content;
                 $scope.pages = getPager(response.data.totalPages, response.data.pageable.pageNumber);
                 $scope.page = response.data;
+                $scope.currentUser = $localStorage.currentUser;
             });
     };
 
