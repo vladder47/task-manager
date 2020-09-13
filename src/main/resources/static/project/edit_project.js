@@ -1,6 +1,8 @@
 angular.module('app').controller('editProjectController', function ($scope, $http, $routeParams, $window) {
     const contextPath = 'http://localhost:8189/app';
     $scope.editProject = {};
+    $scope.notification = {};
+    $scope.notification.users = {};
 
     fillTable = function (projectId) {
         $http.get(contextPath + '/api/v1/projects/' + projectId)
@@ -17,6 +19,7 @@ angular.module('app').controller('editProjectController', function ($scope, $htt
                                 $scope.editProject.leader = {};
                                 $scope.editProject.leader.id = $scope.project.leaderId;
                                 $scope.editProject.users = setUsers($scope.projectUsers, $scope.users);
+                                $scope.notification.text = "Project " + $scope.project.id + " was changed";
                                 console.log($scope.editProject);
                             });
                     });
@@ -52,9 +55,14 @@ angular.module('app').controller('editProjectController', function ($scope, $htt
         // в случае, если изменение даты не происходит, то поле считается null,
         // поэтому приходится доставать его вручную
         $scope.editProject.deadline = new Date(document.getElementById("editProjectDeadline").value);
+        $scope.notification.users = $scope.editProject.users;
         $http.put(contextPath + '/api/v1/projects', $scope.editProject)
             .then(function () {
-                $window.location.href = contextPath + '/index.html';
+                console.log($scope.notification.users);
+                $http.post(contextPath + '/api/v1/notifications', $scope.notification)
+                    .then(function () {
+                        $window.location.href = contextPath + '/index.html';
+                    });
             });
     };
 

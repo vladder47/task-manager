@@ -1,6 +1,7 @@
 package com.vtb.java.spring.task.manager.services;
 
 import com.vtb.java.spring.task.manager.entities.Task;
+import com.vtb.java.spring.task.manager.entities.User;
 import com.vtb.java.spring.task.manager.entities.dto.TaskDto;
 import com.vtb.java.spring.task.manager.repositories.TaskRepository;
 import lombok.AllArgsConstructor;
@@ -48,4 +49,5 @@ public class TaskService {
     public boolean existsById(Long id) {
         return taskRepository.existsById(id);
     }
+
 }

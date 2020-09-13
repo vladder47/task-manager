@@ -44,7 +44,13 @@ public class User {
     @JoinTable(name = "projects_users",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private List<User> projects;
+    private List<Project> projects;
+
+    @ManyToMany
+    @JoinTable(name = "notifications_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "notification_id"))
+    private List<Notification> notifications;
 
     @CreationTimestamp
     @Column(name = "created_at")

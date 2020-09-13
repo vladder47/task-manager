@@ -1,19 +1,13 @@
-<h3>Регистрация</h3>
-<form novalidate ng-submit="createNewUser()">
-    <div class="form-group col-md-6">
-        <label for="newUserName">Имя</label>
-        <input class="form-control" type="text" ng-model="newUser.username" id="newUserName">
-    </div>
-    <div class="form-group col-md-6">
-        <label for="newUserEmail">Почта</label>
-        <input class="form-control" type="text" ng-model="newUser.email" id="newUserEmail">
-    </div>
-    <div class="form-group col-md-6">
-        <label for="newUserPassword">Пароль</label>
-        <input class="form-control" type="text" ng-model="newUser.password" id="newUserPassword">
-    </div>
-<!--    Добавить поле passwordConfirm и сравнивать с password на идентичность-->
-    <div>
-        <button class="btn btn-success" type="submit">Сохранить</button>
-    </div>
-</form>
+<div class="mb-3 text-center">
+    <form class="form-signin" ng-submit="createNewUser()" style="max-width: 350px; padding: 15px; margin: 0 auto;">
+        <h1 class="h3 mb-3 font-weight-normal">Введите свои данные</h1>
+        <label for="newUserName" class="sr-only">Имя пользователя</label>
+        <input type="text" ng-model="newUser.username" id="newUserName" class="form-control" placeholder="Имя пользователя" style="margin-bottom: 10px;" required="">
+        <label for="newUserEmail" class="sr-only">Почта</label>
+        <input type="text" ng-model="newUser.email" id="newUserEmail" class="form-control" placeholder="Почта" style="margin-bottom: 10px;" required="">
+        <label for="newUserPassword" class="sr-only">Пароль</label>
+        <input type="password" ng-model="newUser.password" id="newUserPassword" class="form-control" placeholder="Пароль" style="margin-bottom: 10px;" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
+        <p class="mt-5 mb-3 text-muted">© VTB 2020</p>
+    </form>
+</div>
