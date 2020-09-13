@@ -18,11 +18,11 @@
 <div class="container">
     <h1>Менеджер задач</h1>
     <br>
-<!--    Спрятать кнопку Регистрации если пользователь авторизован-->
     <a class="btn btn-outline-warning" href="#!/registration">Регистрация</a>
     <a class="btn btn-outline-warning" href="#!/auth">Войти или выйти</a>
     <a class="btn btn-outline-warning" href="#!/">Главная</a>
     <a class="btn btn-outline-warning" href="#!/projects">Проекты</a>
+    <a class="btn btn-outline-warning" href="#!/all">Все задачи</a>
 
     <ng-view></ng-view>
 
@@ -37,6 +37,7 @@
     <script src="task/task_page.js"></script>
     <script src="task/create_task.js"></script>
     <script src="task/edit_task.js"></script>
+    <script src="task/users_tasks.js"></script>
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.vtb.java.spring.task.manager.services;
 
 import com.vtb.java.spring.task.manager.entities.Role;
+import com.vtb.java.spring.task.manager.entities.Task;
 import com.vtb.java.spring.task.manager.entities.User;
 import com.vtb.java.spring.task.manager.entities.dto.UserDto;
 import com.vtb.java.spring.task.manager.repositories.UserRepository;
@@ -46,6 +47,10 @@ public class UserService implements UserDetailsService {
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public Optional<UserDto> findDtoByUsername(String username) {
+        return userRepository.findDtoByUsername(username);
     }
 
     public User saveUser(User user){

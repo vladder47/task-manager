@@ -1,6 +1,7 @@
 angular.module('app').controller('editProjectController', function ($scope, $http, $routeParams, $window) {
     const contextPath = 'http://localhost:8189/app';
     $scope.editProject = {};
+    $scope.editProject.leader = {};
 
     fillTable = function (projectId) {
         $http.get(contextPath + '/api/v1/projects/' + projectId)
@@ -14,7 +15,6 @@ angular.module('app').controller('editProjectController', function ($scope, $htt
                                 $scope.projectUsers = response.data;
                                 $scope.editProject.id = $scope.project.id;
                                 $scope.editProject.title = $scope.project.title;
-                                $scope.editProject.leader = {};
                                 $scope.editProject.leader.id = $scope.project.leaderId;
                                 $scope.editProject.users = setUsers($scope.projectUsers, $scope.users);
                                 console.log($scope.editProject);

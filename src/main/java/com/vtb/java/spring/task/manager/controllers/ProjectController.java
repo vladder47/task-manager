@@ -1,7 +1,6 @@
 package com.vtb.java.spring.task.manager.controllers;
 
 import com.vtb.java.spring.task.manager.entities.Project;
-import com.vtb.java.spring.task.manager.entities.User;
 import com.vtb.java.spring.task.manager.entities.dto.ProjectDto;
 import com.vtb.java.spring.task.manager.entities.dto.UserDto;
 import com.vtb.java.spring.task.manager.exceptions.ResourceNotFoundException;
@@ -12,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -23,8 +23,9 @@ public class ProjectController {
     private UserService userService;
 
     @GetMapping
-    public Page<ProjectDto> getAllProjectsDto(@RequestParam(value = "page", defaultValue = "1") Integer page){
-        return projectService.findAllProjectDto(page - 1, 10);
+    public Page<ProjectDto> getAllProjectsDto(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                              Principal principal){
+        return projectService.findAllProjectDto(page - 1, 10, principal.getName());
     }
 
     @GetMapping("/{id}")
@@ -35,7 +36,6 @@ public class ProjectController {
 
     @PostMapping(path = "/create",consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-
     public Project createNewProject(@RequestBody Project project) {
         if (project.getId() != null) {
             project.setId(null);
@@ -58,6 +58,9 @@ public class ProjectController {
 
     @DeleteMapping("/{id}")
     public void deleteProjectById(@PathVariable Long id){
+        if (!projectService.existsById(id)) {
+            throw new ResourceNotFoundException(String.format("Проект с id= %d не найден", id));
+        }
         projectService.deleteById(id);
     }
 }

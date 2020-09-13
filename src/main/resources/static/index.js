@@ -47,6 +47,10 @@
             .when('/tasks/edit/:taskId', {
                 templateUrl: 'task/edit_task.html',
                 controller: 'editTaskController'
+            })
+            .when('/all', {
+                templateUrl: 'task/users_tasks.html',
+                controller: 'usersTasksController'
             });
 
         // $httpProvider.interceptors.push(function ($q, $location) {

@@ -26,7 +26,6 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
         $http.get(contextPath + '/api/v1/users/current')
             .then(function (response) {
                 $scope.newComment.user.id = response.data.id;
-                console.log($scope.newComment.user.id);
             });
     };
 
@@ -36,6 +35,7 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
         $http.post(contextPath + '/api/v1/comments', $scope.newComment)
             .then(function () {
                 getTask($routeParams.taskId);
+                $scope.newComment.text = null;
             });
     };
 

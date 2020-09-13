@@ -78,7 +78,8 @@ values ('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3
 
 INSERT INTO projects(title, leader_id)
 VALUES ('Project 1', 1),
-       ('Project 2', 2);
+       ('Project 2', 2),
+       ('Project 3', 2);
 
 INSERT INTO projects_users (user_id, project_id)
 VALUES (1, 1),
@@ -106,7 +107,9 @@ VALUES ('Task 1', 'Description 1', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
        ('Task 14', 'Description 14', 'CHECKING', 'VERYLOW', 2, 2, '2020-09-05'),
        ('Task 15', 'Description 15', 'CHECKING', 'HIGH', 2, 2, '2020-09-05'),
        ('Task 16', 'Description 16', 'CHECKING', 'HIGH', 2, 2, '2020-09-05'),
-       ('Task 17', 'Description 17', 'CHECKING', 'HIGH', 2, 2, '2020-09-05');
+       ('Task 17', 'Description 17', 'CHECKING', 'HIGH', 2, 2, '2020-09-05'),
+       ('Task 18', 'Description 18', 'CHECKING', 'HIGH', 2, 3, '2020-09-05'),
+       ('Task 19', 'Description 19', 'CHECKING', 'HIGH', 2, 3, '2020-09-05');
 
 CREATE TABLE files (id bigserial primary key,
                     filename text not null,
