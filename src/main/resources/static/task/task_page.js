@@ -38,10 +38,10 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
         $http.post(contextPath + '/api/v1/comments', $scope.newComment)
             .then(function () {
                 if (parseComment($scope.newComment.text) !== null) {
-                    $http.get(contextPath + '/api/v1/users/current')
+                    $http.get(contextPath + '/api/v1/users/dtos/' + parseComment($scope.newComment.text))
                         .then(function (response) {
                             $scope.notification.users.push({'id': response.data.id});
-                            $scope.notification.text = "На ваш комментарий ответил " + $localStorage.currentUser.username;
+                            $scope.notification.text = "Вам оставил комментарий пользователь " + $localStorage.currentUser.username;
                             $http.post(contextPath + '/api/v1/notifications', $scope.notification)
                                 .then(function() {
 

@@ -35,6 +35,12 @@ public class UserController {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Пользователь с логином = %s не найден", principal.getName())));
     }
 
+    @GetMapping("/dtos/{username}")
+    public UserDto getUserDtoByUsername(@PathVariable String username) {
+        return userService.findDtoByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Пользователь с логином = %s не найден", username)));
+    }
+
     @GetMapping("dtos/project/{id}")
     public List<UserDto> getAllUsersDtoByProjectId(@PathVariable Long id) {
         return userService.findAllUsersByProjectId(id);
