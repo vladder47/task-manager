@@ -1,9 +1,11 @@
 package com.vtb.java.spring.task.manager.controllers;
 
+import com.vtb.java.spring.task.manager.entities.File;
 import com.vtb.java.spring.task.manager.entities.Task;
 import com.vtb.java.spring.task.manager.entities.dto.TaskDto;
 import com.vtb.java.spring.task.manager.entities.filtering.dto.TaskFilterDto;
 import com.vtb.java.spring.task.manager.exceptions.ResourceNotFoundException;
+import com.vtb.java.spring.task.manager.services.FileService;
 import com.vtb.java.spring.task.manager.services.TaskService;
 import com.vtb.java.spring.task.manager.utils.TaskFilter;
 import com.vtb.java.spring.task.manager.utils.TaskSort;
@@ -13,9 +15,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,6 +28,7 @@ import java.util.Map;
 @RequestMapping("/api/v1/tasks")
 public class TaskController {
     private TaskService taskService;
+    private FileService fileService;
 
     @GetMapping
     public Page<TaskDto> getAllTasksByProjectId(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -89,4 +95,18 @@ public class TaskController {
         }
         return statuses;
     }
+
+    @PostMapping(value = "/{taskId}/files")
+    @ResponseStatus(HttpStatus.OK)
+    public void handleFileUpload(@RequestParam("file") MultipartFile file, @PathVariable Long taskId) throws IOException {
+        System.out.println("SAVE");
+        fileService.storeFile(getTaskById(taskId).getProjectId() ,taskId ,file);
+    }
+
+    @GetMapping(value = "/{taskId}/files")
+    public List<String> getFileByProject(@PathVariable Long taskId){
+        System.out.println(fileService.findFilesByProjectIdAndTaskId(getTaskById(taskId).getProjectId(), taskId));
+        return fileService.findFilesByProjectIdAndTaskId(getTaskById(taskId).getProjectId(), taskId);
+    }
+
 }

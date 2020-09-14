@@ -63,4 +63,50 @@ angular.module('app').controller('taskPageController', function ($scope, $http, 
     }
 
     getTask($routeParams.taskId);
+
+    getFiles = function (taskId){
+        console.log(taskId);
+        $http.get(contextPath + '/api/v1/tasks/' + taskId + '/files')
+            .then(function (response) {
+                $scope.FileList = response.data;
+                console.log('LOG = ', $scope.FileList);
+            });
+    }
+
+    getFiles($routeParams.taskId);
+
+    var formdata = new FormData();
+    $scope.getTheFiles = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formdata.append(key, value);
+        });
+    };
+
+    $scope.uploadFiles = function (taskId){
+        console.log('ADD FILE');
+
+        var file = $scope.myFile;
+        console.log('file is ' );
+        console.dir(file);
+        var uploadUrl = contextPath + '/api/v1/tasks/' + taskId + '/files';
+        fileUpload.uploadFileToUrl(file, uploadUrl);
+
+        var request = {
+            method: 'POST',
+            url: uploadUrl,
+            data: formdata,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+
+        // SEND THE FILES.
+        $http(request)
+            .success(function (d) {
+                alert(d);
+            })
+            .error(function () {
+            });
+    };
+
 });

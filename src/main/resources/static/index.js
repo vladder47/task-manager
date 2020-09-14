@@ -41,6 +41,7 @@
                 controller: 'createTaskController'
             })
             .when('/tasks/:taskId', {
+                styleUrls: ['./app.component.scss'],
                 templateUrl: 'task/task_page.html',
                 controller: 'taskPageController'
              })

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileReader;
+import java.util.List;
 import java.util.Scanner;
 
 @RestController
@@ -20,7 +21,9 @@ public class FileController {
 
     @GetMapping("/{id}")
     public File getFileById(@PathVariable Long id){
+//        System.out.println("FILEEEEEEEe");
         String path = "src/main/resources/files/";
+
 
         String fileName = fileService.findFileNameById(id);
         try (FileReader file = new FileReader(path + fileName)){
@@ -35,7 +38,6 @@ public class FileController {
         } catch (Exception e){
             e.printStackTrace();
         }
-
         return fileService.findFileById(id);
     }
 

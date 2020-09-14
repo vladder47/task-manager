@@ -77,12 +77,6 @@ create table commentary
     foreign key (task_id) references tasks (id)
 );
 
-CREATE TABLE files (id bigserial primary key,
-                    filename text not null,
-                    created_at timestamp default current_timestamp,
-                    updated_at timestamp default current_timestamp
-);
-
 create table notifications
 (
     id         bigserial primary key,
@@ -151,10 +145,6 @@ VALUES ('Task 1', 'Description 1', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
        ('Task 18', 'Description 18', 'CHECKING', 'HIGH', 2, 3, '2020-09-05'),
        ('Task 19', 'Description 19', 'CHECKING', 'HIGH', 2, 3, '2020-09-05');
 
-INSERT INTO files (filename)
-VALUES  ('README.md'),
-        ('fileTest.txt');
-
 INSERT INTO users_tasks (user_id, task_id)
 VALUES (1, 1),
        (1, 2),
@@ -183,3 +173,15 @@ VALUES ('В течение дня будет готово!', 1, 1, 0),
        ('Нашел новый подход к реализации этой идеи', 1, 1, 0),
        ('Сделано!', 2, 1, 0),
        ('Отличный результат!', 2, 1, 0);
+
+CREATE TABLE files (id bigserial primary key,
+                    project_id bigint not null references projects(id),
+                    task_id bigint not null references tasks(id),
+                    filename varchar(300) not null,
+                    created_at timestamp,
+                    updated_at timestamp
+);
+
+INSERT INTO files (project_id, task_id, filename)
+VALUES  (1, 1, 'fileTest.txt'),
+        (1, 2, 'readme.md');

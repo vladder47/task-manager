@@ -7,7 +7,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=taskmanager_team4
     username: postgres
-    password: qwerty
+    password: admin
   jpa:
     show-sql: true
     properties:

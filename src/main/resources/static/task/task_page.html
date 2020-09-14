@@ -44,6 +44,34 @@
     <br>
     <br>
 
+    <div class=files>
+        <h3 class="title-comments">Файлы</h3>
+        <div>
+            <table class="table table-hover" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>Название файла</td>
+                    <td>Действие</td>
+                </tr>
+                <tbody>
+                <tr ng-repeat="f in FileList">
+<!--                    <td><a ng-href="#!/tasks?project={{p.id}}">{{p.title}}</a></td>-->
+                    <td>{{f}}</td>
+                    <td>{{f}}</td>
+<!--                    <td>{{p.deadline}}</td>-->
+<!--                    <td><a ng-href="#!/projects/edit/{{p.id}}" ng-hide="p.leaderUsername != currentUser.username">Изменить</a></td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-controller="taskPageController">
+
+            <input type="file" id="file1" name="file" multiple
+                   ng-files="getTheFiles($files)"  file-model = "myFile"/>
+
+            <input type="button" ng-click="uploadFiles(task.id)" value="Upload" />
+        </div>
+    </div>
+
     <div class="comments">
         <h3 class="title-comments">Комментарии</h3>
         <ul class="media-list">
