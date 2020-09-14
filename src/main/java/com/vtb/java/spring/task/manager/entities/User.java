@@ -1,5 +1,6 @@
 package com.vtb.java.spring.task.manager.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

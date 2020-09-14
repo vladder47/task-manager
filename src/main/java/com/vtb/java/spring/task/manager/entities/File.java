@@ -22,6 +22,14 @@ public class File {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "project_id")
+    @NotNull
+    private Long projectId;
+
+    @Column(name = "task_id")
+    @NotNull
+    private Long taskId;
+
     @Column(name = "filename")
     @NotNull
     private String fileName;
@@ -33,4 +41,10 @@ public class File {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public File(@NotNull Long projectId, @NotNull Long taskId, @NotNull String fileName) {
+        this.projectId = projectId;
+        this.taskId = taskId;
+        this.fileName = fileName;
+    }
 }
