@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +24,7 @@ public class Task {
     private Long id;
 
     @Column(name = "title")
+    @Size(min = 3, max = 30)
     private String title;
 
     @ManyToOne
@@ -29,6 +32,7 @@ public class Task {
     private User leader;
 
     @Column(name = "description")
+    @Size(min = 10, max = 5000)
     private String description;
 
     @ManyToOne
@@ -62,6 +66,7 @@ public class Task {
     private Status status;
 
     @Column(name = "deadline")
+    @NotNull
     private LocalDate deadLine;
 
     @ManyToMany

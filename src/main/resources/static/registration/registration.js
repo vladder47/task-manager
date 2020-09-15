@@ -3,9 +3,13 @@ angular.module('app').controller('registrationController', function ($scope, $ht
     $scope.newUser= {};
 
     $scope.createNewUser = function () {
-        $http.post(contextPath + '/api/v1/registration', $scope.newUser)
-            .then(function () {
-                $window.location.href = contextPath + '/index.html';
-            });
+        if ($scope.newUser.password !== $scope.passwordConfirm) {
+            alert('Пароли не совпадают!');
+        } else {
+            $http.post(contextPath + '/api/v1/registration', $scope.newUser)
+                .then(function () {
+                    $window.location.href = contextPath + '/index.html';
+                });
+        }
     };
 });

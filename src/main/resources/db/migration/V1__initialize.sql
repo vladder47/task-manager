@@ -8,6 +8,22 @@ create table users
     updated_at timestamp default current_timestamp
 );
 
+create table roles (
+    id                    serial,
+    name                  varchar(50) not null,
+    created_at            timestamp default current_timestamp,
+    updated_at            timestamp default current_timestamp,
+    primary key (id)
+);
+
+CREATE TABLE users_roles (
+    user_id               bigint not null,
+    role_id               int not null,
+    primary key (user_id, role_id),
+    foreign key (user_id) references users (id),
+    foreign key (role_id) references roles (id)
+);
+
 create table projects (
     id                    bigserial primary key,
     title                 varchar(30) not null,
@@ -23,14 +39,6 @@ CREATE TABLE projects_users
     user_id    bigint not null references users(id),
     primary key (user_id, project_id)
 );
-
--- INSERT INTO projects_users (project_id, user_id)
--- VALUES
--- (1, 1),
--- (1, 2),
--- (1, 3),
--- (2, 1),
--- (2, 2);
 
 create table tasks
 (
@@ -69,16 +77,46 @@ create table commentary
     foreign key (task_id) references tasks (id)
 );
 
+CREATE TABLE files (id bigserial primary key,
+                    filename text not null,
+                    created_at timestamp default current_timestamp,
+                    updated_at timestamp default current_timestamp
+);
+
+create table notifications
+(
+    id         bigserial primary key,
+    text       varchar(255),
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
+);
+
+CREATE TABLE notifications_users
+(
+    user_id bigint not null,
+    notification_id bigint not null,
+    primary key (user_id, notification_id),
+    foreign key (user_id) references users (id),
+    foreign key (notification_id) references notifications (id)
+);
+
 insert into users (username, password, email)
-values ('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob_johnson@gmail.com'),
+values ('Bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob_johnson@gmail.com'),
        ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com'),
-       ('John Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com'),
-       ('Vladislav', 'qwerty', 'vladisdrozdov@gmail.com'),
-       ('Andrey', 'qwerty', 'asdfghrewq@gmail.com');
+       ('John', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com'),
+       ('Vladislav', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'vladisdrozdov@gmail.com'),
+       ('Andrey', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'asdfghrewq@gmail.com');
+
+insert into roles (name)
+values
+('ROLE_USER');
+
+insert into users_roles (user_id, role_id) values (2, 1);
 
 INSERT INTO projects(title, leader_id)
 VALUES ('Project 1', 1),
-       ('Project 2', 2);
+       ('Project 2', 2),
+       ('Project 3', 2);
 
 INSERT INTO projects_users (user_id, project_id)
 VALUES (1, 1),
@@ -87,7 +125,10 @@ VALUES (1, 1),
        (2, 2),
        (3, 1),
        (4, 1),
-       (5, 2);
+       (5, 2),
+       (1, 3),
+       (2, 3),
+       (3, 3);
 
 INSERT INTO tasks (title, description, status, priority, leader_id, project_id, deadline)
 VALUES ('Task 1', 'Description 1', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
@@ -106,13 +147,9 @@ VALUES ('Task 1', 'Description 1', 'CREATED', 'PLANNING', 1, 1, '2020-09-05'),
        ('Task 14', 'Description 14', 'CHECKING', 'VERYLOW', 2, 2, '2020-09-05'),
        ('Task 15', 'Description 15', 'CHECKING', 'HIGH', 2, 2, '2020-09-05'),
        ('Task 16', 'Description 16', 'CHECKING', 'HIGH', 2, 2, '2020-09-05'),
-       ('Task 17', 'Description 17', 'CHECKING', 'HIGH', 2, 2, '2020-09-05');
-
-CREATE TABLE files (id bigserial primary key,
-                    filename text not null,
-                    created_at timestamp default current_timestamp,
-                    updated_at timestamp default current_timestamp
-);
+       ('Task 17', 'Description 17', 'CHECKING', 'HIGH', 2, 2, '2020-09-05'),
+       ('Task 18', 'Description 18', 'CHECKING', 'HIGH', 2, 3, '2020-09-05'),
+       ('Task 19', 'Description 19', 'CHECKING', 'HIGH', 2, 3, '2020-09-05');
 
 INSERT INTO files (filename)
 VALUES  ('README.md'),
@@ -120,7 +157,25 @@ VALUES  ('README.md'),
 
 INSERT INTO users_tasks (user_id, task_id)
 VALUES (1, 1),
-       (1, 2);
+       (1, 2),
+       (1, 3),
+       (1, 4),
+       (1, 5),
+       (1, 6),
+       (1, 7),
+       (1, 8),
+       (1, 9),
+       (1, 10),
+       (1, 11),
+       (1, 12),
+       (1, 13),
+       (1, 14),
+       (1, 15),
+       (1, 16),
+       (1, 17),
+       (1, 18),
+       (1, 19);
+
 
 INSERT INTO commentary (text, user_id, task_id, parent)
 VALUES ('В течение дня будет готово!', 1, 1, 0),

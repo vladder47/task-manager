@@ -1,10 +1,8 @@
 package com.vtb.java.spring.task.manager.entities.dto;
 
 import com.vtb.java.spring.task.manager.entities.Task;
-
 import java.time.LocalDate;
 
-// DTO для вывода всех тасок по определенному проекту
 public interface TaskDto {
     Long getId();
 

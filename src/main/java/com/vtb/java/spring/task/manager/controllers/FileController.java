@@ -36,7 +36,6 @@ public class FileController {
             e.printStackTrace();
         }
 
-        System.out.println(fileName);
         return fileService.findFileById(id);
     }
 

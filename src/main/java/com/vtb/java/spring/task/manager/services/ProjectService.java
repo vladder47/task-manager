@@ -20,20 +20,9 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public Page<ProjectDto> findAllProjectDto(int page, int size) {
-        return projectRepository.findAllProjectsDto(PageRequest.of(page, size));
+    public Page<ProjectDto> findAllProjectDto(int page, int size, String username) {
+        return projectRepository.findAllProjectsDto(PageRequest.of(page, size), username);
     }
-
-//    public Project findById(Long id){
-//        return projectRepository.findById(id).orElseThrow();
-////        return projectRepository
-////                .findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Проект с id = %d не найден", id)));
-//    }
-//
-//    public ProjectDto findProjectByIdDto(Long id){
-//        return projectRepository.findProjectByIdDto(id);
-////                .orElseThrow(() -> new ResourceNotFoundException("Проект с id = " + id + " не найден"));
-//    }
 
     public Optional<ProjectDto> findProjectDtoById(Long id) {
         return projectRepository.findProjectDtoById(id);

@@ -1,0 +1,194 @@
+<h1>Форма для поиска задач</h1>
+<form novalidate ng-submit="applyFilter(1)" method="GET">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="title">Название задачи</label>
+            <input type="text" class="form-control" id="title"  name="title"
+                   ng-model="form.title">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="project">Название проекта</label>
+            <input type="text" class="form-control" id="project"  name="project"
+                   ng-model="form.project">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="leader">Руководитель задачи</label>
+            <input type="text" class="form-control" id="leader"  name="leader"
+                   ng-model="form.leader">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="user">Исполнитель задачи</label>
+            <input type="text" class="form-control" id="user"  name="user"
+                   ng-model="form.user">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-check-label" for="statuses">Статусы задач</label>
+        <br>
+        <div class="form-check form-check-inline" ng-repeat="(key, value) in statuses" id="statuses">
+            <input class="form-check-input" type="checkbox" ng-model="form.status[key]" id="status">
+            <label class="form-check-label" for="status">{{value}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-check-label" for="statuses">Приоритеты задач</label>
+        <br>
+        <div class="form-check form-check-inline" ng-repeat="(key, value) in priorities" id="priorities">
+            <input class="form-check-input" type="checkbox" ng-model="form.priority[key]" id="priority">
+            <label class="form-check-label" for="priority">{{value}}</label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3" ng-init="form.sort[0]='id,asc'">
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[0]" ng-value="'id,asc'" id="id_asc" name="id" checked>
+                <label class="custom-control-label" for="id_asc">ID по возрастанию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[0]" ng-value="'id,desc'" id="id_desc" name="id">
+                <label class="custom-control-label" for="id_desc">ID по убыванию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[0]" ng-value="'none'" id="id_none" name="id">
+                <label class="custom-control-label" for="id_none">Не сортировать</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3" ng-init="form.sort[1]='none'">
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[1]" ng-value="'title,asc'" id="title_asc" name="title" checked>
+                <label class="custom-control-label" for="title_asc">Название по возрастанию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[1]" ng-value="'title,desc'" id="title_desc" name="title">
+                <label class="custom-control-label" for="title_desc">Название по убыванию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[1]" ng-value="'none'" id="title_none" name="title">
+                <label class="custom-control-label" for="title_none">Не сортировать</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3" ng-init="form.sort[2]='none'">
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[2]" ng-value="'leader,asc'" id="leader_asc" name="leader" checked>
+                <label class="custom-control-label" for="leader_asc">Руководитель по возрастанию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[2]" ng-value="'leader,desc'" id="leader_desc" name="leader">
+                <label class="custom-control-label" for="leader_desc">Руководитель по убыванию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[2]" ng-value="'none'" id="leader_none" name="leader">
+                <label class="custom-control-label" for="leader_none">Не сортировать</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3" ng-init="form.sort[3]='none'">
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[3]" ng-value="'project,asc'" id="project_asc" name="project" checked>
+                <label class="custom-control-label" for="project_asc">Проект по возрастанию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[3]" ng-value="'project,desc'" id="project_desc" name="project">
+                <label class="custom-control-label" for="project_desc">Проект по убыванию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[3]" ng-value="'none'" id="project_none" name="project">
+                <label class="custom-control-label" for="project_none">Не сортировать</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3" ng-init="form.sort[4]='none'">
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[4]" ng-value="'priority,asc'" id="priority_asc" name="priority" checked>
+                <label class="custom-control-label" for="priority_asc">Приоритет по возрастанию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[4]" ng-value="'priority,desc'" id="priority_desc" name="priority">
+                <label class="custom-control-label" for="priority_desc">Приоритет по убыванию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[4]" ng-value="'none'" id="priority_none" name="priority">
+                <label class="custom-control-label" for="priority_none">Не сортировать</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3" ng-init="form.sort[5]='none'">
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[5]" ng-value="'status,asc'" id="status_asc" name="status" checked>
+                <label class="custom-control-label" for="status_asc">Статус по возрастанию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[5]" ng-value="'status,desc'" id="status_desc" name="status">
+                <label class="custom-control-label" for="status_desc">Статус по убыванию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[5]" ng-value="'none'" id="status_none" name="status">
+                <label class="custom-control-label" for="status_none">Не сортировать</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3" ng-init="form.sort[6]='none'">
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[6]" ng-value="'deadline,asc'" id="deadline_asc" name="deadline" checked>
+                <label class="custom-control-label" for="deadline_asc">Дедлайн по возрастанию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[6]" ng-value="'deadline,desc'" id="deadline_desc" name="deadline">
+                <label class="custom-control-label" for="deadline_desc">Дедлайн по убыванию</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" ng-model="form.sort[6]" ng-value="'none'" id="deadline_none" name="deadline">
+                <label class="custom-control-label" for="deadline_none">Не сортировать</label>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Применить</button>
+</form>
+
+<br>
+<br>
+
+<div ng-show="page.totalPages === 0">По вашему запросу не было найдено ни одной задачи</div>
+<div ng-hide="page.totalPages === 0">
+    <h1>Мои задачи:</h1>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Id задачи</td>
+            <td>Название</td>
+            <td>Имя владельца</td>
+            <td>Описание</td>
+            <td>Название проекта</td>
+            <td>Приоритет</td>
+            <td>Статус</td>
+            <td>Срок исполнения</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="t in TasksList">
+            <td>{{t.id}}</td>
+            <td><a ng-href="#!/tasks/{{t.id}}">{{t.title}}</a></td>
+            <td>{{t.leaderDto.username}}</td>
+            <td>{{t.description}}</td>
+            <td>{{t.projectDto.title}}</td>
+            <td>{{priorities[t.priority]}}</td>
+            <td>{{statuses[t.status]}}</td>
+            <td>{{t.deadline}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <br>
+    <nav aria-label="Task navigation">
+        <ul class="pagination" ng-if="page.totalPages > 1">
+            <li class="page-item" ng-class="{disabled:page.first}">
+                <a class="page-link" ng-click="applyFilter(1)">Первая</a></li>
+            <li class="page-item" ng-class="{disabled:page.first}">
+                <a class="page-link" ng-click="applyFilter(page.pageable.pageNumber)">Предыдущая</a></li>
+            <li class="page-item" ng-repeat="p in pages" ng-class="{active:page.pageable.pageNumber === p - 1}">
+                <a class="page-link" ng-click="applyFilter(p)">{{p}}</a></li>
+            <li class="page-item" ng-class="{disabled:page.last}">
+                <a class="page-link" ng-click="applyFilter(page.pageable.pageNumber + 2)">Следующая</a></li>
+            <li class="page-item" ng-class="{disabled:page.last}">
+                <a class="page-link" ng-click="applyFilter(page.totalPages)">Последняя</a></li>
+        </ul>
+    </nav>
+
+</div>

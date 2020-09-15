@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,6 +18,7 @@ public class Role {
     private Long id;
 
     @Column(name = "name")
+    @Size(min = 3, max = 50)
     private String name;
 
     @CreationTimestamp

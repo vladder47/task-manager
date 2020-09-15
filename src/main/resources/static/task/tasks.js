@@ -26,7 +26,6 @@ angular.module('app').controller('tasksController', function ($scope, $http, $ro
         fillTable(pageNumber, $routeParams.project);
     };
 
-    // google's pagination logic
     function getPager(totalPages, currentPage) {
         currentPage = currentPage || 1;
 

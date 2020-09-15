@@ -8,8 +8,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -24,10 +25,12 @@ public class Project {
     private Long id;
 
     @Column(name = "title")
+    @Size(min = 3, max = 30)
     private String title;
 
     @ManyToOne
     @JoinColumn(name = "leader_id")
+    @NotNull
     private User leader;
 
     @ManyToMany

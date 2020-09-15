@@ -1,7 +1,10 @@
-angular.module('app').controller('editTaskController', function ($scope, $http, $routeParams, $window) {
+angular.module('app').controller('editTaskController', function ($scope, $http, $routeParams, $window, $localStorage) {
     const contextPath = 'http://localhost:8189/app';
     $scope.editTask = {};
     $scope.editTask.project = {};
+    $scope.notification = {};
+    $scope.notification.users = {};
+    $scope.editTask.leader = {};
 
     fillTable = function (taskId) {
         $http.get(contextPath + '/api/v1/tasks/' + taskId)
@@ -22,6 +25,8 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
                                 $scope.editTask.priority = $scope.task.priority;
                                 $scope.editTask.status = $scope.task.status;
                                 $scope.editTask.project.id = $scope.task.projectId;
+                                $scope.notification.text = "Задача " + $scope.task.id + " была изменена";
+                                $scope.currentUser = $localStorage.currentUser;
                             });
                     });
             });
@@ -42,7 +47,7 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
         for (let i in allUsers) {
             for (let j in taskUsers) {
                 if (allUsers[i]['id'] === taskUsers[j]['id'] && allUsers[i]['username'] === taskUsers[j]['username']) {
-                    users[parseInt(i) + 1] = true;
+                    users[allUsers[i]['id']] = allUsers[i]['id'];
                     break;
                 }
             }
@@ -54,9 +59,8 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
         let users = [];
         for (let key in $scope.editTask.users) {
             let temp = {};
-            if ($scope.editTask.users[key] === true) {
-                let id = $scope.users[key - 1]['id'];
-                temp.id = id;
+            if ($scope.editTask.users[key] !== false) {
+                temp.id = $scope.editTask.users[key];
                 users.push(temp);
             }
         }
@@ -64,9 +68,13 @@ angular.module('app').controller('editTaskController', function ($scope, $http, 
         // в случае, если изменение даты не происходит, то поле считается null,
         // поэтому приходится доставать его вручную
         $scope.editTask.deadLine = new Date(document.getElementById("editTaskDeadline").value);
+        $scope.notification.users = $scope.editTask.users;
         $http.put(contextPath + '/api/v1/tasks', $scope.editTask)
             .then(function () {
-                $window.location.href = contextPath + '/index.html';
+                $http.post(contextPath + '/api/v1/notifications', $scope.notification)
+                    .then(function () {
+                        $window.location.href = contextPath + '/index.html';
+                    });
             });
     };
 

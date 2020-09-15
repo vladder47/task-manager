@@ -1,8 +1,6 @@
 package com.vtb.java.spring.task.manager.controllers;
 
-import com.vtb.java.spring.task.manager.entities.Task;
 import com.vtb.java.spring.task.manager.entities.User;
-import com.vtb.java.spring.task.manager.exceptions.ResourceNotFoundException;
 import com.vtb.java.spring.task.manager.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,5 +34,3 @@ public class RegistrationController {
         return new User();
     }
 }
-
-// TODO: 10.09.2020 Выводить PSQLException на фронт

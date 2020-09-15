@@ -1,6 +1,9 @@
 angular.module('app').controller('editProjectController', function ($scope, $http, $routeParams, $window) {
     const contextPath = 'http://localhost:8189/app';
     $scope.editProject = {};
+    $scope.notification = {};
+    $scope.notification.users = {};
+    $scope.editProject.leader = {};
 
     fillTable = function (projectId) {
         $http.get(contextPath + '/api/v1/projects/' + projectId)
@@ -14,10 +17,9 @@ angular.module('app').controller('editProjectController', function ($scope, $htt
                                 $scope.projectUsers = response.data;
                                 $scope.editProject.id = $scope.project.id;
                                 $scope.editProject.title = $scope.project.title;
-                                $scope.editProject.leader = {};
                                 $scope.editProject.leader.id = $scope.project.leaderId;
                                 $scope.editProject.users = setUsers($scope.projectUsers, $scope.users);
-                                console.log($scope.editProject);
+                                $scope.notification.text = "Проект " + $scope.project.id + " был изменен";
                             });
                     });
             });
@@ -52,9 +54,13 @@ angular.module('app').controller('editProjectController', function ($scope, $htt
         // в случае, если изменение даты не происходит, то поле считается null,
         // поэтому приходится доставать его вручную
         $scope.editProject.deadline = new Date(document.getElementById("editProjectDeadline").value);
+        $scope.notification.users = $scope.editProject.users;
         $http.put(contextPath + '/api/v1/projects', $scope.editProject)
             .then(function () {
-                $window.location.href = contextPath + '/index.html';
+                $http.post(contextPath + '/api/v1/notifications', $scope.notification)
+                    .then(function () {
+                        $window.location.href = contextPath + '/index.html';
+                    });
             });
     };
 

@@ -2,14 +2,19 @@ package com.vtb.java.spring.task.manager.controllers;
 
 import com.vtb.java.spring.task.manager.entities.Task;
 import com.vtb.java.spring.task.manager.entities.dto.TaskDto;
+import com.vtb.java.spring.task.manager.entities.filtering.dto.TaskFilterDto;
 import com.vtb.java.spring.task.manager.exceptions.ResourceNotFoundException;
 import com.vtb.java.spring.task.manager.services.TaskService;
 import com.vtb.java.spring.task.manager.utils.TaskFilter;
+import com.vtb.java.spring.task.manager.utils.TaskSort;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,20 +30,16 @@ public class TaskController {
         return taskService.findAllTasksDtoByProjectId(projectId, page - 1, 10);
     }
 
-//    @GetMapping("/all")
-//    public Page<TaskDto> getAllTasks(@RequestParam(value = "page", defaultValue = "1") Integer page,
-//                                     @RequestParam(required = false) Map<String, String> params) {
-//        System.out.println(params);
-//        TaskFilter taskFilter = new TaskFilter(params);
-//        return taskService.findAllTasksDto(page - 1, 10, taskFilter.getSpec());
-//    }
-
-//    @GetMapping("/all")
-//    public Page<Task> getAllTasks(@RequestParam(value = "page", defaultValue = "1") Integer page,
-//                                  @RequestParam(required = false) Map<String, String> params) {
-//        TaskFilter taskFilter = new TaskFilter(params);
-//        return taskService.findAllTasks(page - 1, 10, taskFilter.getSpec());
-//    }
+    @GetMapping("/all")
+    public Page<TaskFilterDto> getAllTasks(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                           @RequestParam(required = false) MultiValueMap<String, String> params,
+                                           @RequestParam(defaultValue = "id,asc") String[] sort,
+                                           Principal principal) {
+        params.add("auth", principal.getName());
+        TaskFilter taskFilter = new TaskFilter(params);
+        TaskSort taskSort = new TaskSort(sort);
+        return taskService.findAllTasks(page - 1, 10, taskFilter.getSpec(), Sort.by(taskSort.getOrders()));
+    }
 
     @GetMapping("/{id}")
     public TaskDto getTaskById(@PathVariable Long id) {

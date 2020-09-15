@@ -1,12 +1,11 @@
 package com.vtb.java.spring.task.manager.entities;
 
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,12 +19,15 @@ public class User {
     private Long id;
 
     @Column(name = "username")
+    @Size(min = 5, max = 30)
     private String username;
 
     @Column(name = "password")
+    @Size(min = 3, max = 80)
     private String password;
 
     @Column(name = "email")
+    @Size(min = 5, max = 50)
     private String email;
 
     @ManyToMany
@@ -44,7 +46,13 @@ public class User {
     @JoinTable(name = "projects_users",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private List<User> projects;
+    private List<Project> projects;
+
+    @ManyToMany
+    @JoinTable(name = "notifications_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "notification_id"))
+    private List<Notification> notifications;
 
     @CreationTimestamp
     @Column(name = "created_at")

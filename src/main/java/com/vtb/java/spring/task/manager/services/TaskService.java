@@ -2,10 +2,14 @@ package com.vtb.java.spring.task.manager.services;
 
 import com.vtb.java.spring.task.manager.entities.Task;
 import com.vtb.java.spring.task.manager.entities.dto.TaskDto;
+import com.vtb.java.spring.task.manager.entities.filtering.dto.TaskFilterDto;
+import com.vtb.java.spring.task.manager.entities.filtering.mapper.TaskMapper;
 import com.vtb.java.spring.task.manager.repositories.TaskRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +29,14 @@ public class TaskService {
         return taskRepository.findAllTasksByProjectId(projectId, PageRequest.of(page, size));
     }
 
-    public Page<Task> findAllTasks(int page, int size, Specification<Task> spec) {
-        return taskRepository.findAll(spec, PageRequest.of(page, size));
+    public Page<TaskFilterDto> findAllTasks(int page, int size, Specification<Task> spec, Sort sort) {
+        Page<Task> pageTask = taskRepository.findAll(spec, PageRequest.of(page, size, sort));
+        List<TaskFilterDto> tasks = TaskMapper.MAPPER.fromTaskList(pageTask.getContent());
+        return new PageImpl<>(tasks, pageTask.getPageable(), pageTask.getTotalElements());
+    }
+
+    public List<Task> findAllTasks(Specification<Task> spec, Sort sort) {
+        return taskRepository.findAll(spec, sort);
     }
 
     public Optional<TaskDto> findTaskDtoById(Long id) {
@@ -48,4 +58,5 @@ public class TaskService {
     public boolean existsById(Long id) {
         return taskRepository.existsById(id);
     }
+
 }

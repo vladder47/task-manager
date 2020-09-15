@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notifications</title>
+</head>
+<body>
+
+<h3>Уведомления</h3>
+<table class="table table-hover" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>id</td>
+        <td>Текст</td>
+        <td>Дата</td>
+    </tr>
+    <tbody>
+    <tr ng-repeat="n in NotificationList">
+        <td>{{n.id}}</td>
+        <td>{{n.text}}</td>
+        <td><span class="date" ng-bind="n.createdAt | date: 'MM/dd/yyyy h:mma'"></span> </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

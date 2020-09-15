@@ -1,15 +1,13 @@
 package com.vtb.java.spring.task.manager.entities;
 
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Data
@@ -21,17 +19,21 @@ public class Commentary {
     private Long id;
 
     @Column(name = "text")
+    @Size(min = 3, max = 255)
     private String text;
 
     @Column(name = "parent")
+    @NotNull
     private Long parent;
 
     @ManyToOne
     @JoinColumn(name = "task_id")
+    @NotNull
     private Task task;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
 
     @CreationTimestamp

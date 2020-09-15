@@ -7,19 +7,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-//    @Query("select p.id as id, p.title as title, p.leader.username as leaderUsername, " +
-//            "p.createdAt as createdAt, p.deadline as deadline from Project p")
-//    List<ProjectDto> findAllProjectsDto();
-
-    @Query("select p.id as id, p.title as title, p.leader.id as leaderId," +
+    @Query("select distinct p.id as id, p.title as title, p.leader.id as leaderId," +
             " p.leader.username as leaderUsername, p.createdAt as createdAt," +
-            " p.deadline as deadline from Project p")
-    Page<ProjectDto> findAllProjectsDto(Pageable pageable);
+            " p.deadline as deadline from Project p join p.users u where u.username = :username" +
+            " or p.leader.username = :username")
+    Page<ProjectDto> findAllProjectsDto(Pageable pageable, String username);
 
     @Query("select p.id as id, p.title as title, p.leader.id as leaderId, p.leader.username as leaderUsername, " +
             "p.deadline as deadline from Project p where p.id = :id")

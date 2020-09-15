@@ -21,13 +21,7 @@
             <input type="text" ng-model="editProject.title" class="form-control" id="ProjectName">
         </div>
         <div class="form-group">
-            <label for="editProjectLeaderId">Лидер проекта</label>
-            <select ng-model="editProject.leader.id" class="form-control" id="editProjectLeaderId">
-                <option type="number" ng-repeat="u in users" ng-value="u.id">{{u.username}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="editProjectDeadline">Введите дату:</label>
+            <label for="editProjectDeadline">Дата сдачи:</label>
             <input type="date" ng-value="project.deadline" ng-model="editProject.deadline" class="form-control" id="editProjectDeadline">
         </div>
         <div class="form-group">

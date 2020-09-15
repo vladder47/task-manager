@@ -11,7 +11,6 @@ angular.module('app').controller('authController', function ($scope, $http, $loc
                     $scope.user.username = null;
                     $scope.user.password = null;
 
-                    console.log($localStorage.currentUser);
                 }
             }, function errorCallback(response) {
                 window.alert(response.data.message);
